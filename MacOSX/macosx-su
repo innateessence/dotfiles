@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+###############################################################################
+# Screen                                                                      #
+###############################################################################
+
+# Enable HiDPI display modes (requires restart)
+sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+
+###############################################################################
+# Finder                                                                      #
+###############################################################################
+
+# Show the /Library folder
+sudo chflags nohidden /Library
+
+# Show the /Volumes folder
+sudo chflags nohidden /Volumes

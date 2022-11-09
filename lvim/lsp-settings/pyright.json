@@ -1,0 +1,28 @@
+{
+  "include": [
+  ],
+
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+  ],
+
+  "ignore": [
+    ".tox"
+  ],
+
+  "defineConstant": {
+    "DEBUG": true
+  },
+
+  "venv": "ve",
+
+  "reportMissingImports": true,
+  "reportGeneralTypeIssues": false,
+
+  "executionEnvironments": [
+    {
+      "root": ".",
+    },
+  ]
+}

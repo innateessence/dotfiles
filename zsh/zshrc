@@ -1,0 +1,38 @@
+#!/usr/bin/env zsh
+
+
+# Source dependency dotfiles
+
+# Mac Syntax
+command -v brew &> /dev/null && [ -f "$(brew --prefix)"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source "$(brew --prefix)"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Arch Syntax
+[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+
+# Source custom dotfiles  -  sourced individually to ensure exports.zsh sourced first.
+if [ -d ~/.dotfiles/zsh ]; then
+  source ~/.dotfiles/zsh/private_functions.zsh
+  source ~/.dotfiles/zsh/exports.zsh
+  source ~/.dotfiles/zsh/aliases.zsh
+  source ~/.dotfiles/zsh/functions.zsh
+  # source ~/.dotfiles/zsh/toomah-functions.zsh
+  source ~/.dotfiles/zsh/wrapper-functions.zsh
+  source ~/.dotfiles/zsh/private_functions.zsh  # re-source this so private_functions can access aliases and functions circular-ly.
+  source ~/.dotfiles/zsh/setopts.zsh
+  source ~/.dotfiles/zsh/completions.zsh
+  source ~/.dotfiles/zsh/zstyle.zsh
+  source ~/.dotfiles/zsh/keybinds.zsh
+  source ~/.dotfiles/zsh/hooks.zsh
+  source ~/.dotfiles/zsh/prompt.zsh
+
+  # Custom function calls
+  # mail -e && info "You have mail!"
+  mkquickcd
+
+  # Custom script calls   -   Use subshell to silence background job output annoyance.
+  # (bash $DOTFILES_DIR/scripts/check-connection.sh &)
+  # (bash $DOTFILES_DIR/scripts/ls-prs.sh &)
+fi
+
