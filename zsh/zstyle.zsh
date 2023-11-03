@@ -111,27 +111,26 @@ zstyle ':completion:most-accessed-file:*' file-sort access
 zstyle ':completion:most-accessed-file:*' file-patterns '*:all\ files'
 zstyle ':completion:most-accessed-file:*' hidden all
 zstyle ':completion:most-accessed-file:*' completer _files
-zstyle ':completion:*:(scp|sftp|ftp|lftp):*' group-order \
-    users files all-files hosts-domain hosts-host hosts-ipaddr
-zstyle ':completion:*:ssh:*' tag-order \
-    users 'hosts:-host hosts:-domain:domain hosts:-ipaddr:IP\ address *'
-zstyle ':completion:*:ssh:*' group-order \
-    hosts-domain hosts-host users hosts-ipaddr
-zstyle ':completion:*:(ssh|scp|ftp|sftp|lftp):*:hosts-host' ignored-patterns \
-    '*.*' loopback localhost
-zstyle ':completion:*:(ssh|scp|ftp|sftp|lftp):*:hosts-domain' ignored-patterns \
-    '<->.<->.<->.<->' '^*.*' '*@*'
-zstyle ':completion:*:(ssh|scp|ftp|sftp|lftp):*:hosts-ipaddr' ignored-patterns \
-    '^<->.<->.<->.<->' '127.0.0.<->'
-zstyle ':completion:*:(ssh|scp|ftp|sftp|lftp):*:users' ignored-patterns \
-    adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
-    dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
-    hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
-    mailman mailnull mldonkey mysql nagios \
-    named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
-    operator pcap postfix postgres privoxy pulse pvm quagga radvd \
-    rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
-# zstyle ':completion:*:(ssh|scp|ftp|sftp|lftp):*:login-name' ignored-patterns _*
+# zstyle ':completion:*:(scp|sftp|ftp|lftp):*' group-order users files all-files hosts-domain hosts-host hosts-ipaddr
+# zstyle ':completion:*:ssh:*' tag-order users 'hosts:-host hosts:-domain:domain hosts:-ipaddr:IP\ address *'
+# zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
+# zstyle ':completion:*:(ssh|scp|ftp|sftp|lftp):*:hosts-host' ignored-patterns '*.*' loopback localhost loopback ip6-loopback localhost ip6-localhost broadcasthost
+# zstyle ':completion:*:(ssh|scp|ftp|sftp|lftp):*:hosts-ipaddr' ignored-patterns '^<->.<->.<->.<->' '127.0.0.<->'
+# zstyle ':completion:*:(ssh|scp|ftp|sftp|lftp):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'zstyle ':completion:*:(ssh|scp|ftp|sftp|lftp):*:users' ignored-patterns \
+#     adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
+#     dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
+#     hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
+#     mailman mailnull mldonkey mysql nagios \
+#     named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
+#     operator pcap postfix postgres privoxy pulse pvm quagga radvd \
+#     rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
+# zstyle ignore login-name that starts with '_'
+# FIXME: This doesn't behave as expected.
+zstyle ':completion:*:(ssh|scp|ftp|sftp|lftp):*:login-name' ignored-patterns '_*'
+
+# On MacOS Sonoma 14.0+ the following line is super fast where the lines above as very slow...
+zstyle ':completion:*:(ssh|scp|sftp):*' hosts $(cat ~/.ssh/config | grep 'Host '  | awk '{s = s $2 " "} END {print s}')
+
 
 ## VCS
 # vcs_info
@@ -147,4 +146,3 @@ zstyle ':vcs_info:*' nvcsformats   ""                           "%~"
 
 # zstyle show completion menu if 2 or more items to select
 zstyle ':completion:*'                    menu select=2
-

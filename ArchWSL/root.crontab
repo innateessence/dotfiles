@@ -1,0 +1,23 @@
+# CronJob Syntax
+# * * * * * command
+
+# * - Minute (0-59)
+# * - Hour (0-23)
+# * - Day of Month (1-31)
+# * - Month (1-12)
+# * - Day of Week (0-6) (0 is Sunday)
+
+# Arch Linux Cron implementation:
+# Cronie: https://github.com/cronie-crond/cronie/
+
+# Crontab Dump
+@daily /usr/bin/crontab -l > /home/jack/.dotfiles/ArchWSL/root.crontab
+
+# Update Mirrors
+@daily reflector --age 24 --country 'United States' --completion-percent 100 --protocol 'http,https' --fastest 20 --sort rate --number 5 --save /etc/pacman.d/mirrorlist
+
+# Update Pacman
+@daily pacman -Sy
+
+# Download latest Pacman packages every day
+@daily pacman -Swu --noconfirm

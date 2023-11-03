@@ -1,0 +1,38 @@
+# CronJob Syntax
+# * * * * * command
+
+# * - Minute (0-59)
+# * - Hour (0-23)
+# * - Day of Month (1-31)
+# * - Month (1-12)
+# * - Day of Week (0-6) (0 is Sunday)
+
+# MacOS cron implementation:
+# VixieCron: https://github.com/svagner/vixie-cron/blob/master/FEATURES
+
+# Redirecting Stdin & Stderr to /dev/null will silence `mail` output for cronjob :)
+
+# WARN: ROOT CRONTAB
+
+# MacOS toast notification
+NOTIFY="/bin/bash /Users/jack/.dotfiles/scripts/mac/notify.sh"
+# FIXME: $NOTIFY doesn't work in root crontab
+
+# Jobs to run on bootup
+@reboot /bin/bash /Users/jack/.dotfiles/MacOSX/macosx-su 
+
+# Throttle network to 2MB/s down
+# TODO: Only run this on Home WiFi
+# @reboot /opt/homebrew/bin/throttle --stop && /opt/homebrew/bin/throttle --down 2000 --up 1000 --rtt 0 --packetLoss 0 && $NOTIFY "Network Throttled" "My speeds will are throttled now" 
+
+# Auto update dumps
+@hourly /usr/bin/crontab -l > /Users/jack/.dotfiles/MacOSX/root.crontab 
+
+# Auto update ad blocking hosts file
+@daily /opt/homebrew/bin/hblock 
+
+# Auto download OS updates
+@daily /usr/sbin/softwareupdate --background -a -d > /dev/null 2>&1 
+
+# Auto dump cron env for debugging
+@hourly /bin/mkdir -p /tmp/cron-env && /usr/bin/env > /tmp/cron-env/root

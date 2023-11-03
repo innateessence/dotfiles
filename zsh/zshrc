@@ -11,28 +11,42 @@ command -v brew &> /dev/null && [ -f "$(brew --prefix)"/share/zsh-syntax-highlig
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 
-# Source custom dotfiles  -  sourced individually to ensure exports.zsh sourced first.
+# Source custom dotfiles  -  sourced individually to ensure exports.zsh sourced nearly first.
 if [ -d ~/.dotfiles/zsh ]; then
-  source ~/.dotfiles/zsh/private_functions.zsh
-  source ~/.dotfiles/zsh/exports.zsh
-  source ~/.dotfiles/zsh/aliases.zsh
-  source ~/.dotfiles/zsh/functions.zsh
-  # source ~/.dotfiles/zsh/toomah-functions.zsh
-  source ~/.dotfiles/zsh/wrapper-functions.zsh
-  source ~/.dotfiles/zsh/private_functions.zsh  # re-source this so private_functions can access aliases and functions circular-ly.
-  source ~/.dotfiles/zsh/setopts.zsh
-  source ~/.dotfiles/zsh/completions.zsh
-  source ~/.dotfiles/zsh/zstyle.zsh
-  source ~/.dotfiles/zsh/keybinds.zsh
-  source ~/.dotfiles/zsh/hooks.zsh
-  source ~/.dotfiles/zsh/prompt.zsh
+    source ~/.dotfiles/zsh/private_functions.zsh
+    source ~/.dotfiles/zsh/exports.zsh
+    source ~/.dotfiles/zsh/aliases.zsh
+    source ~/.dotfiles/zsh/script-aliases.zsh
+    source ~/.dotfiles/zsh/functions.zsh
+    # source ~/.dotfiles/zsh/toomah-functions.zsh
+    source ~/.dotfiles/zsh/wrapper-functions.zsh
+    source ~/.dotfiles/zsh/private_functions.zsh  # re-source this so private_functions can access aliases and functions circular-ly.
+    source ~/.dotfiles/zsh/setopts.zsh
+    source ~/.dotfiles/zsh/completions.zsh
+    source ~/.dotfiles/zsh/zstyle.zsh
+    source ~/.dotfiles/zsh/keybinds.zsh
+    source ~/.dotfiles/zsh/hooks.zsh
+    source ~/.dotfiles/zsh/prompt.zsh
 
-  # Custom function calls
-  # mail -e && info "You have mail!"
-  mkquickcd
+    # Custom function calls
+    if __is_mac; then
+        mail -e && info "You have mail!"
+    fi
+    mkquickcd
+    if __is_in_tmux; then
+      ve --activate
+    fi
 
-  # Custom script calls   -   Use subshell to silence background job output annoyance.
-  # (bash $DOTFILES_DIR/scripts/check-connection.sh &)
-  # (bash $DOTFILES_DIR/scripts/ls-prs.sh &)
+    # Custom script calls   -   Use subshell to silence background job output annoyance.
+    # (bash $DOTFILES_DIR/scripts/check-connection.sh &)
+    # (bash $DOTFILES_DIR/scripts/ls-prs.sh &)
 fi
 
+
+# NOTE: This should be at the top of the zshrc file
+# if __is_mac; then
+#   eval "$(/opt/homebrew/bin/brew shellenv)"
+#   FZF_VERSION=$(fzf --version | awk '{print $1}')
+#   source /opt/homebrew/Cellar/fzf/$FZF_VERSION/shell/completion.zsh
+#   source /opt/homebrew/Cellar/fzf/$FZF_VERSION/shell/key-bindings.zsh
+# fi

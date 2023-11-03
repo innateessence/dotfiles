@@ -27,7 +27,7 @@ vim.opt.hlsearch = false
 ------------------
 lvim.log.level = "warn"
 lvim.format_on_save = false
-lvim.colorscheme = "tokyonight"
+lvim.colorscheme = "tokyonight-night"
 -- lvim.colorscheme = "nightfox"
 -- lvim.colorscheme = "carbonfox"
 -- lvim.transparent_window = true

@@ -20,9 +20,7 @@ lvim.builtin.treesitter.rainbow.enable = true
 -- Packer Config --
 -------------------
 
-local packer = require('packer')
-
-packer.max_jobs = 30
+-- local packer = require('packer')
 
 -- packer.init({
 --   max_jobs = 20,
@@ -53,6 +51,12 @@ packer.max_jobs = 30
 --   },
 -- }
 
+lvim.builtin.telescope.defaults.file_ignore_patterns = {
+  "node%_modules/.*",
+  "%.yarn",
+  "**/dist"
+}
+
 ------------------------
 -- Treesitter Configs --
 ------------------------
@@ -80,13 +84,13 @@ lvim.builtin.treesitter.ensure_installed = {
 -- Additional Plugins
 lvim.plugins = {
   -- Theme / colorscheme
-  -- {
-  --   "EdenEast/nightfox.nvim",
-  --   config = function()
-  --     local options = { transparent = lvim.transparent_window, }
-  --     require("nightfox").setup({ { options = options }, })
-  --   end -- use lunarvim's transparency setting for colorscheme
-  -- },
+  {
+    "EdenEast/nightfox.nvim",
+    config = function()
+      local options = { transparent = lvim.transparent_window, }
+      require("nightfox").setup({ { options = options }, })
+    end -- use lunarvim's transparency setting for colorscheme
+  },
 
   {
     -- Dedicated Diagnostics preview window
@@ -150,11 +154,11 @@ lvim.plugins = {
     "rmagatti/goto-preview",
     config = function()
       require('goto-preview').setup {
-        width = 120; -- Width of the floating window
-        height = 25; -- Height of the floating window
-        default_mappings = false; -- Bind default mappings
-        debug = false; -- Print debug information
-        opacity = nil; -- 0-100 opacity level of the floating window where 100 is fully transparent.
+        width = 120, -- Width of the floating window
+        height = 25, -- Height of the floating window
+        default_mappings = false, -- Bind default mappings
+        debug = false, -- Print debug information
+        opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
         post_open_hook = nil -- A function taking two arguments, a buffer and a window to be ran as a hook.
         -- You can use "default_mappings = true" setup option
         -- Or explicitly set keybindings
@@ -186,12 +190,12 @@ lvim.plugins = {
       local slow = '450'
       local medium = '150'
       local fast = '50'
-      mappings['<PageUp>'] = {'scroll', {'-vim.wo.scroll', 'true', fast, [['sine']]}}
-      mappings['<PageDown>'] = {'scroll', {'vim.wo.scroll', 'true', fast, [['sine']]}}
-      mappings['<C-PageUp>'] = {'scroll', {'-vim.wo.scroll', 'true', medium, [['sine']]}}
-      mappings['<C-PageDown>'] = {'scroll', {'vim.wo.scroll', 'true', medium, [['sine']]}}
-      mappings['<C-Up>'] = {'scroll', {'-vim.wo.scroll', 'true', slow, [['sine']]}}
-      mappings['<C-Down>'] = {'scroll', {'vim.wo.scroll', 'true', slow, [['sine']]}}
+      mappings['<PageUp>'] = { 'scroll', { '-vim.wo.scroll', 'true', fast, [['sine']] } }
+      mappings['<PageDown>'] = { 'scroll', { 'vim.wo.scroll', 'true', fast, [['sine']] } }
+      mappings['<C-PageUp>'] = { 'scroll', { '-vim.wo.scroll', 'true', medium, [['sine']] } }
+      mappings['<C-PageDown>'] = { 'scroll', { 'vim.wo.scroll', 'true', medium, [['sine']] } }
+      mappings['<C-Up>'] = { 'scroll', { '-vim.wo.scroll', 'true', slow, [['sine']] } }
+      mappings['<C-Down>'] = { 'scroll', { 'vim.wo.scroll', 'true', slow, [['sine']] } }
 
       require('neoscroll').setup({
         -- All these keys will be mapped to their corresponding default scrolling animation
@@ -211,5 +215,27 @@ lvim.plugins = {
     end
   },
 
+  {
+    "metakirby5/codi.vim",
+    cmd = "Codi",
+  },
 
+  -- Git Blame
+  {
+    "f-person/git-blame.nvim",
+    event = "BufRead",
+    config = function()
+      vim.cmd "highlight default link gitblame SpecialComment"
+      vim.g.gitblame_enabled = 0
+    end,
+  },
+
+  -- TODO: and misc related comments highlighter
+  {
+    "folke/todo-comments.nvim",
+    event = "BufRead",
+    config = function()
+      require("todo-comments").setup()
+    end,
+  },
 }

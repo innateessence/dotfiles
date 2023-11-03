@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
     "module": "system",
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true
   },
-  "include": ["**/*.js"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": [
+    "**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
 }

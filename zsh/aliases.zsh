@@ -4,17 +4,23 @@
 alias py="python"
 alias bpy="python -m bpython"
 alias ppy="python -m ptpython"
+alias ipy="python -m IPython"
 alias http-status="hs"
 alias cat="bat"
 alias extract="untar"
 alias markdown="glow"
 alias luash="luap"
+alias beep="echo -e \a"
 
 # cd aliases
 alias ~="cd ~"
+alias ~~="cd $WORK_DIR"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias .......="cd ../../../../../.."
 alias cd.="cd $DOTFILES_DIR"
 
 # git aliases
@@ -22,11 +28,12 @@ alias git="hub"
 alias gs="git status"
 alias ga="git add"
 alias gb="git branch | grep '*' | tr -d '* '" # print working branch
+alias gp='__git_push'
 alias gff="git pull --ff-only"
-alias gopen="_open_repo"
+alias gopen="__open_repo"
 alias branch="gb"
 alias lspr="gh pr list --search 'review:required review-requested:@me'"
-alias propen="gh pr view --web"
+# alias propen="gh pr view --web" # TODO: Make this built ontop of git
 
 # Kitty kitten aliases
 alias icat="kitty +kitten icat"
@@ -46,12 +53,17 @@ alias mkdir="mkdir -p"
 # Misc aliases
 alias mnt="mount | grep -E ^/dev | column -t | sort"
 alias wget="wget -c" # resume downloads by default
-alias bashfoo="_browser_open https://tldp.org/LDP/abs/html/"
+alias bashfoo="__browser_open https://tldp.org/LDP/abs/html/"
 alias du-gui="ncdu"
 alias hexdump="od -A x -t x1z -v"
+alias pip-upgrade-all="pip list --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+
+# Music aliases
+alias lofi='mpv --no-video "https://play.streamafrica.net/lofiradio"'
+alias phonk='mpv --no-video "http://www.youtube.com/watch?v=ab-WFNS27co"'
 
 # history aliases
-alias cp!='history -n -1 | clip' # `clip !!` copies the last command into the clipboard
+alias clip!='history -n -1 | clip' # behaves as if `clip !!` worked. copies the last command into the clipboard
 alias histgrep="history -n 0 | grep"
 alias hist="history -n 0"
 alias hgrep="histgrep"
@@ -64,13 +76,14 @@ alias bye="exit 0"
 alias ip="ip -color -brief"
 
 # fzf aliases (including homebrew fzff)
-alias f="fzff"
-alias zf="fzff"
+alias f="fzff | clip"
+alias cdf="fzff_cd"
+alias xf="fzf_exec"
 
 # Editor aliases (LunarVim ftw)
 alias vi='lvim'
 alias vim='lvim'
-alias nvim='lvim'
+# alias nvim='lvim'
 alias lvim!="sudo -E lvim"
 alias vidiff='lvim -d'
 alias vimdiff='lvim -d'
@@ -80,26 +93,32 @@ alias lvimdiff='lvim -d'
 alias sudo="sudo -E" # preserve env by default.
 
 # ArchLinux specific aliases
-if _is_arch_linux; then
-  alias Pacman="sudo pacman"
-  alias update-mirrors="sudo reflector --age 24 --country 'United States' --completion-percent 100 --protocol 'http,https' --fastest 20 --sort rate --number 5 --save /etc/pacman.d/mirrorlist"
-  alias open="xdg-open"
-  alias clip="xclip -i"
+if __is_arch_linux; then
+    alias Pacman="sudo pacman"
+    alias update-mirrors="sudo reflector --age 24 --country 'United States' --completion-percent 100 --protocol 'http,https' --fastest 20 --sort rate --number 5 --save /etc/pacman.d/mirrorlist"
+    alias open="xdg-open"
+    alias clip="xclip -i"
+    alias missing-files="pacman -Qk 2>&1 | grep -E ', [1-9][0-9]* missing files'"
 fi
 
 # MacOS specific aliases
-if _is_mac; then
-  alias clip="pbcopy"
+if __is_mac; then
+    alias clip="no-eol | pbcopy |  echo '[+] copied to clipboard'"
+    alias python="python3"
+    alias missing-files="brew missing"
+    alias pip="pip3"
+    alias throttle-on="sudo throttle --stop > /dev/null && throttle --down 2000 --up 1000 --rtt 0 --packetLoss 0"
+    alias throttle-off="sudo throttle --stop"
 fi
 
 # WSL specific aliases
-if _is_wsl; then
-  :
+if __is_wsl; then
+    alias clip="clip.exe"
 fi
 
 # Unset aliases if the expected dependency doesn't exist in path
-if ! command -v bpython   &> /dev/null;  then unalias ppy          ; fi
-if ! command -v ptpython  &> /dev/null;  then unalias bpy          ; fi
+if ! command -v bpython   &> /dev/null;  then unalias bpy          ; fi
+if ! command -v ptpython  &> /dev/null;  then unalias ppy          ; fi
 if ! command -v hs        &> /dev/null;  then unalias http-status  ; fi
 if ! command -v lsd       &> /dev/null;  then unalias ls           ; fi
 if ! command -v bat       &> /dev/null;  then unalias cat          ; fi

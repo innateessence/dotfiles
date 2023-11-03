@@ -3,90 +3,161 @@
 # This houses 'private' functions that are exclusively used as helpers to other dotfiles.
 
 # One liners
-function _is_mac(){ _is_equal $(uname -s) "Darwin" ; }
-function _is_arch_linux(){ command -pv pacman &> /dev/null ; }
-function _is_equal(){ test $1 = $2 ; }
-function _is_vpn_active(){ ifconfig -a | grep $VPN_TUNNEL_DEV &> /dev/null ; }
+function __is_mac(){ __is_equal $(uname -s) "Darwin" ; }
+function __is_arch_linux(){ command -pv pacman &> /dev/null ; }
+function __is_equal(){ test $1 = $2 ; }
+function __is_vpn_active(){ ifconfig -a | grep $VPN_TUNNEL_DEV &> /dev/null ; }
+function __is_in_tmux(){ test -n "$TMUX" ; }
 
-function _get_jira_id(){ branch | grep -ioE "Vii-[0-9]+" ; }
-function _get_latest_release_branch(){ git branch | grep -E 'VII[0-9\.]+-release' | tail -n 1 | tr -d ' ' ; }
-function _get_repo_name(){ git config --get remote.origin.url | sed -e 's/^git@.*:\([[:graph:]]*\).git/\1/' ; }
+function __get_jira_id(){ branch | grep -ioE "$JIRA_DEFAULT_PROJECT-[0-9]+" ; }
+function __get_latest_release_branch(){ git branch | grep -E 'VII[0-9\.]+-release' | tail -n 1 | tr -d ' ' ; }
+function __get_repo_name(){ git config --get remote.origin.url | sed -e 's/^git@.*:\([[:graph:]]*\).git/\1/' ; }
 
-function _open_repo(){ _browser_open $(_get_repo_url) &> /dev/null ; }
-function _has_internet_access(){ timeout $NETWORK_CHECK_SHELL_TIMEOUT ping -c 1 google.com &> /dev/null ; }
+function __open_repo(){ __browser_open $(__get_repo_url) &> /dev/null ; }
+function __has_internet_access(){ timeout $NETWORK_CHECK_SHELL_TIMEOUT ping -c 1 google.com &> /dev/null ; }
+function __git_push() { git push --set-upstream origin $(gb) ;}
+function __is_number(){ [[ $1 =~ ^[0-9]+$ ]] ; }
 
-function _is_wsl(){
-  if [ -e /proc/version ]; then
-    if $(grep -i microsoft /proc/version &>/dev/null) ; then
-      return 0
+function __is_wsl(){
+    if [ -e /proc/version ]; then
+        if $(grep -i microsoft /proc/version &>/dev/null) ; then
+            return 0
+        fi
     fi
-  fi
-  return 1
+    return 1
 }
 
 
-function _is_dir_empty(){
-  local DIR
-  DIR="$1"
+function __is_dir_empty(){
+    local DIR
+    DIR="$1"
     if [ -d "$DIR" ]
     then
-      if [ "$(ls -A $DIR)" ]; then
-        return 1  # Not empty
-      else
-        return 0  # Empty
-      fi
+        if [ "$(ls -A $DIR)" ]; then
+            return 1  # Not empty
+        else
+            return 0  # Empty
+        fi
     else
-      return 2  # No directory found
+        return 2  # No directory found
     fi
 }
 
-function _browser_open(){
-  for url in $@; do
-    if _is_wsl; then
-       $BROWSER $url &> /dev/null
+function __browser_open(){
+    for url in $@; do
+        if __is_wsl; then
+            $BROWSER $url &> /dev/null
+        else
+            python -m webbrowser $url &> /dev/null
+        fi
+    done
+}
+
+function __determine_shell(){
+    local shells
+    shells=(zsh bash)
+    for shell in "${shells[@]}"; do
+        if [[ "$SHELL" == *"$shell" ]]; then;
+            echo "$shell"
+            return
+        fi
+    done
+}
+
+function __determine_rc_file(){
+    local shell
+    local rc_file
+    shell="$(__determine_shell)"
+    rc_file="$HOME"/."$shell"rc
+    if [ ! -f "$rc_file" ]; then
+        warn "$rc_file does not exist"
+    fi
+    echo $rc_file
+}
+
+function __get_ip(){
+    local ip
+    ip=$(curl -s ifconfig.me/ip)
+    retcode=$?
+    if [ $retcode -eq 0 ]; then
+        echo $ip
+    fi
+    return $retcode
+}
+
+
+function __get_repo_url(){
+    local remote_url
+    remote_url="$(git config --get remote.origin.url || git config --get remote.upstream.url)"
+    if [[ $remote_url != "https://"* ]]; then
+        remote_url=$(echo $remote_url | sed "s/:/\//g" | sed "s/git@/https:\/\//g" | sed "s/\.git//g")
+    fi
+    echo $remote_url
+}
+
+function __outdated_pkgs(){
+    if __is_mac; then
+        brew upgrade -n 2>&1 | grep '\->' | wc -l | tr -d ' '
+    elif __is_arch_linux; then
+        pacman -Qu | wc -l | tr -d ' '
+    fi
+}
+
+function __notify_mac(){
+    # $1 = title
+    # $2 = message
+    /usr/bin/osascript -e "display notification \"$2\" with title \"$1\"" > /dev/null 2>&1
+}
+
+function __get_http_code(){
+    local url="$1"
+    local follow_redirects="${2:-false}"
+    local response
+    if $follow_redirects; then
+        response=$(curl -L --write-out '%{http_code}' -I --silent --output /dev/null $url)
     else
-      python -m webbrowser $url &> /dev/null
+        response=$(curl --write-out '%{http_code}' -I --silent --output /dev/null $url)
     fi
-  done
+    echo $response
 }
 
-function _determine_shell(){
-  local shells
-  shells=(zsh bash)
-  for shell in "${shells[@]}"; do
-    if [[ "$SHELL" == *"$shell" ]]; then;
-      echo "$shell" && break
-    fi
-  done
+function __is_up(){
+    local url="$1"
+    local resp_code=$(__get_http_code $url)
+    echo $resp_code | grep -E "2[0-9][0-9]|3[0-9][0-9]" &> /dev/null && return 0
+    return 1
 }
 
-function _determine_rc_file(){
-  local shell
-  local rc_file
-  shell="$(_determine_shell)"
-  rc_file="$HOME"/."$shell"rc
-  if [ ! -f "$rc_file" ]; then
-    warn "$rc_file does not exist"
-  fi
-  echo $rc_file
+function __write_to_current_stdin(){
+    print -z "$1"
 }
 
-function _get_ip(){
-  local ip
-  ip=$(curl -s ifconfig.me/ip)
-  retcode=$?
-  if [ $retcode -eq 0 ]; then
-    echo $ip
-  fi
-  return $retcode
+function __pidsof(){
+    # Custom function for searching running processes and yielding the PID of the results
+    local name="$1"
+    local PIDS=($(ps -e | grep "$1" | grep -v grep | awk '{print $1}' | tr '\n' ' '))
+    for pid in $PIDS; do
+        echo $pid
+    done
 }
 
+function __is_mouse_wiggling(){
+    test $(__pidsof 'mouse-wiggle.py')
+}
 
-function _get_repo_url(){
-  local remote_url
-  remote_url="$(git config --get remote.origin.url || git config --get remote.upstream.url)"
-  if [[ $remote_url != "https://"* ]]; then
-    remote_url=$(echo $remote_url | sed "s/:/\//g" | sed "s/git@/https:\/\//g")
-  fi
-  echo $remote_url
+function __mac_updates(){
+    softwareupdate -l -a 2>&1 | grep -i 'update available'
+    brew outdated | grep -i 'outdated'
+}
+
+function __mac_last_unlock_time(){
+    log show --style syslog --predicate 'process == "loginwindow"' --debug --info --last 4h | grep "LUIAuthenticationServiceProvider" | grep "activateWithUserName:sessionUnlocked" | tail -n 1 | awk '{print $1,$2}'
+}
+
+function __is_picture_file(){
+    magick identify -quiet -format "%m" "$1" &> /dev/null
+}
+
+function __git_has_uncommitted_changes(){
+    test -n "$(git status --porcelain)"
 }

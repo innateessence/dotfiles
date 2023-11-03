@@ -33,3 +33,6 @@ lvim.builtin.which_key.mappings["d"] = {
   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
 }
 
+lvim.builtin.which_key.mappings['g']['B'] = {"<cmd>GitBlameToggle<CR>", "Git Blame Toggle"}
+lvim.builtin.which_key.mappings['l']['R'] = {"<cmd>LspRestart<CR>", "Restart LSP"}
+lvim.builtin.which_key.mappings['`'] = {"<cmd>Term<CR>", "Terminal"}

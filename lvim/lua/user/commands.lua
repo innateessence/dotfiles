@@ -17,6 +17,6 @@ end
 -- define Vim commands (lua functions)
 -- vim.api.nvim_create_user_command('CommandName', M.FunctionName, {arguments})
 vim.api.nvim_create_user_command('ToggleHighlight', M.ToggleHighlight, {})
-
+vim.api.nvim_create_user_command('Term', 'TermExec cmd="clear"', {}) -- sometimes I just want a quick terminal overtop my code.
 
 return M

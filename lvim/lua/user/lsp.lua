@@ -1,4 +1,3 @@
-
 ------------------------
 -- General LSP Config --
 ------------------------
@@ -46,10 +45,23 @@ formatters.setup {
     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
     filetypes = { "typescript", "typescriptreact" },
   },
+  {
+    command = "htmlbeautifier",
+    filetypes = { 'html' },
+  },
+  {
+    command = "beautysh",
+    filetypes = { "sh", "zsh", "bash" },
+  },
+  {
+    command = "yamlfix",
+    filetypes = { "yaml", "yml" },
+
+  }
 }
 
 -----------------
--- Lsp Linters --
+-- LSP Linters --
 -----------------
 
 -- Linters should be
@@ -79,5 +91,8 @@ linters.setup {
     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
     filetypes = { "javascript", "python", "html", "bash", "zsh", "sh" },
   },
+  {
+    command = "yamllint",
+    filetypes = { "yaml", "yml" },
+  }
 }
-

@@ -1,0 +1,3 @@
+zkg
+pyperclip
+neovim

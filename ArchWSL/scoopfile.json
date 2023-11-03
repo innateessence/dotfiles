@@ -1,0 +1,287 @@
+{
+    "buckets": [
+        {
+            "Name": "extras",
+            "Source": "https://github.com/ScoopInstaller/Extras",
+            "Updated": {
+                "value": "\/Date(1695011282000)\/",
+                "DisplayHint": 2,
+                "DateTime": "Sunday, September 17, 2023 9:28:02 PM"
+            },
+            "Manifests": 1889
+        },
+        {
+            "Name": "java",
+            "Source": "https://github.com/ScoopInstaller/Java",
+            "Updated": {
+                "value": "\/Date(1694751407000)\/",
+                "DisplayHint": 2,
+                "DateTime": "Thursday, September 14, 2023 9:16:47 PM"
+            },
+            "Manifests": 253
+        },
+        {
+            "Name": "main",
+            "Source": "https://github.com/ScoopInstaller/Main",
+            "Updated": {
+                "value": "\/Date(1694997249000)\/",
+                "DisplayHint": 2,
+                "DateTime": "Sunday, September 17, 2023 5:34:09 PM"
+            },
+            "Manifests": 1246
+        },
+        {
+            "Name": "nerd-fonts",
+            "Source": "https://github.com/matthewjberger/scoop-nerd-fonts",
+            "Updated": {
+                "value": "\/Date(1694953803000)\/",
+                "DisplayHint": 2,
+                "DateTime": "Sunday, September 17, 2023 5:30:03 AM"
+            },
+            "Manifests": 296
+        },
+        {
+            "Name": "nonportable",
+            "Source": "https://github.com/TheRandomLabs/scoop-nonportable",
+            "Updated": {
+                "value": "\/Date(1694444733000)\/",
+                "DisplayHint": 2,
+                "DateTime": "Monday, September 11, 2023 8:05:33 AM"
+            },
+            "Manifests": 80
+        }
+    ],
+    "apps": [
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "7zip",
+            "Version": "23.01",
+            "Updated": "\/Date(1694293486965)\/"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "archwsl",
+            "Version": "22.10.16.0",
+            "Updated": "\/Date(1694293491783)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "bat",
+            "Version": "0.23.0",
+            "Updated": "\/Date(1694293493761)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "chromedriver",
+            "Version": "117.0.5938.88",
+            "Updated": "\/Date(1695019568367)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "curl",
+            "Version": "8.3.0_1",
+            "Updated": "\/Date(1695019574614)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "dark",
+            "Version": "3.11.2",
+            "Updated": "\/Date(1694293500577)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "ffmpeg",
+            "Version": "6.0",
+            "Updated": "\/Date(1694293508084)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "gcc",
+            "Version": "11.2.0",
+            "Updated": "\/Date(1694293538930)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "geckodriver",
+            "Version": "0.33.0",
+            "Updated": "\/Date(1694293540486)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "git",
+            "Version": "2.42.0.2",
+            "Updated": "\/Date(1694293561795)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "grep",
+            "Version": "3.11",
+            "Updated": "\/Date(1694293563691)\/"
+        },
+        {
+            "Info": "",
+            "Source": "nerd-fonts",
+            "Name": "Hack-NF",
+            "Version": "3.0.2",
+            "Updated": "\/Date(1694293566212)\/"
+        },
+        {
+            "Info": "",
+            "Source": "nerd-fonts",
+            "Name": "Hack-NF-Mono",
+            "Version": "3.0.2",
+            "Updated": "\/Date(1694293568633)\/"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "jdownloader",
+            "Version": "nightly-20220323",
+            "Updated": "\/Date(1648087059441)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "less",
+            "Version": "643",
+            "Updated": "\/Date(1694293570293)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "lessmsi",
+            "Version": "1.10.0",
+            "Updated": "\/Date(1694293572195)\/"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "ludusavi",
+            "Version": "0.21.0",
+            "Updated": "\/Date(1694293574800)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "make",
+            "Version": "4.4.1",
+            "Updated": "\/Date(1694293576492)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "nmap",
+            "Version": "7.94",
+            "Updated": "\/Date(1694293585247)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "nodejs",
+            "Version": "20.6.1",
+            "Updated": "\/Date(1694293601366)\/"
+        },
+        {
+            "Info": "",
+            "Source": "java",
+            "Name": "openjdk",
+            "Version": "20.0.2-9",
+            "Updated": "\/Date(1694293610795)\/"
+        },
+        {
+            "Info": "",
+            "Source": "java",
+            "Name": "openjdk8-redhat",
+            "Version": "8u342-b07",
+            "Updated": "\/Date(1694293619775)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "openssh",
+            "Version": "9.2.2.0p1",
+            "Updated": "\/Date(1694293621864)\/"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "qt-creator",
+            "Version": "11.0.2",
+            "Updated": "\/Date(1694293640599)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "rust",
+            "Version": "1.72.0",
+            "Updated": "\/Date(1694293818076)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "scons",
+            "Version": "4.5.2",
+            "Updated": "\/Date(1694293828222)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "sed",
+            "Version": "4.9",
+            "Updated": "\/Date(1694293829995)\/"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "sharex",
+            "Version": "15.0.0",
+            "Updated": "\/Date(1694293834757)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "sudo",
+            "Version": "0.2020.01.26",
+            "Updated": "\/Date(1694293836771)\/"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "trafficmonitor",
+            "Version": "1.84.1",
+            "Updated": "\/Date(1694293839831)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "which",
+            "Version": "2.20",
+            "Updated": "\/Date(1694293842137)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "youtube-dl",
+            "Version": "2021.12.17",
+            "Updated": "\/Date(1694293845669)\/"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "zeal",
+            "Version": "0.6.1",
+            "Updated": "\/Date(1694293850312)\/"
+        }
+    ]
+}

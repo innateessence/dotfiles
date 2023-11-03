@@ -16,6 +16,7 @@
   },
 
   "venv": "ve",
+  "venvPath": "~/.virtualenvs/default/",
 
   "reportMissingImports": true,
   "reportGeneralTypeIssues": false,

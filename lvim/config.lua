@@ -11,3 +11,33 @@ require("user.keymaps")
 require("user.autocmds")
 require("user.commands")
 require("user.langs.rust") -- Just do it.
+
+-- Hack to disable git-blame by default. I only want this info sometimes and currently disabling in `config` doesn't work.
+require('gitblame').disable()
+
+-- Copilot test drive.
+table.insert(lvim.plugins, {
+  "zbirenbaum/copilot-cmp",
+  event = "InsertEnter",
+  dependencies = { "zbirenbaum/copilot.lua" },
+  lazy = false,
+  config = function()
+    vim.defer_fn(function()
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })                             -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
+      require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
+    end, 100)
+  end,
+})
+
+-- WSL Clipboard support.
+if vim.fn.has('wsl') == 1 then
+  vim.api.nvim_create_autocmd('TextYankPost', {
+    group = vim.api.nvim_create_augroup('Yank', { clear = true }),
+    callback = function()
+      vim.fn.system('clip.exe', vim.fn.getreg('"'))
+    end,
+  })
+end

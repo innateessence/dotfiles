@@ -1,13 +1,21 @@
 #!/usr/bin/env zsh
 
 # Pathing
-export PATH="$HOME/.local/bin:$HOME/.gem/ruby/2.6.0/bin:$PATH:$HOME/.luarocks/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.gem/ruby/2.6.0/bin:$HOME/.luarocks/bin:$HOME/.local/share/lvim/mason/bin:/opt/local/bin"
 
 # Misc Pathing
 export DOTFILES_DIR="$HOME/.dotfiles"
+export WORK_DIR="$HOME/roadz"
 
 # Default Directory
 export DEFAULT_DIR="$HOME"
+
+# VIRTUALENV (custom use only)
+export DEFAULT_VIRTUALENV="default"
+
+# JIRA (Custom use only)
+export JIRA_URL="https://roadz-jira.atlassian.net"
+export JIRA_DEFAULT_PROJECT="MARKET"
 
 # Default Progs
 export EDITOR='lvim'
@@ -36,14 +44,13 @@ export FZF_DEFAULT_PREVIEW_OPTS='--force-colorization --theme=TwoDark --line-ran
 export NETWORK_CHECK_SHELL_TIMEOUT=4  # Timeout value for functions that check various network access when run as a shell function
 
 # Github (gh, hub)
-export GITHUB_TOKEN="$(pass show personal/github/token/sudo)"
+# export GITHUB_TOKEN="$(pass show personal/github/token/sudo)"
 
 # WSL specific exports
-if _is_wsl; then
-  export DISPLAY="$(\ip route | awk '/^default/{print $3; exit}'):0"  # \ip to ignore the `ip` alias
-  export BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+if __is_wsl; then
+    export DISPLAY="$(\ip route | awk '/^default/{print $3; exit}'):0"  # \ip to ignore the `ip` alias
+    export BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
 fi
-
 
 # Unset exports if the expected dependency doesn't exist in path
 if ! command -v bat &> /dev/null; then unset MANPAGER                 ; fi

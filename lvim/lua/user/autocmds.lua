@@ -17,19 +17,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- This one isn't using pattern to match the bufname. Notsure what it's matching.
--- Matching the bufname was the behavior in old vimscript...
--- IE: `autocmd BufWinEnter, WinEnter term://* startinsert` so `term://` should be the pattern.
--- turns out that pattern is equal to `table <some_mem_address>` weird...
--- vim.api.nvim_create_autocmd({"WinEnter", "BufWinEnter"}, {
---   desc = "Automatically enter insert mode when entering a terminal buffer",
---   pattern = "*",
---   callback = function(pattern)
---     print(pattern)
---     vim.cmd('echomsg "true"')
---   end,
--- })
-
 vim.api.nvim_create_autocmd("FileType", {
   desc = "Use 4 spaces for tabs on python files",
   pattern = "python",
@@ -48,13 +35,13 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-  group = "_general_settings",
-  pattern = "lvim/*/*.lua",
-  desc = "Trigger LvimReload on saving any lvim .lua file",
-  callback = function()
-    print("[+] Detected Lvim config write. Reloading")
-    require('lvim.plugin-loader'):recompile()
-    require("lvim.config"):reload()
-  end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--   group = "_general_settings",
+--   pattern = "lvim/**.lua",
+--   desc = "Trigger LvimReload on saving any lvim .lua file",
+--   callback = function()
+--     require('lvim.plugin-loader'):recompile()
+--     require("lvim.config"):reload()
+--     print("[+] Detected Lvim config write. Reloaded")
+--   end,
+-- })
