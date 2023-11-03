@@ -48,8 +48,8 @@ VAULTS_DIR="/Users/jack/vaults"
 # Auto update user crontab dump every hour
 @hourly /usr/bin/crontab -l > /Users/jack/.dotfiles/MacOSX/user.crontab || $NOTIFY "CronJob" "Failed to dump user crontab"
 
-# Auto pull dotfile changes
-00 9 * * * /Users/jack/.dotfiles/scripts/pull-dotfiles.sh > /dev/null || $NOTIFY "CronJob" "Failed to pull dotfiles"
+# # Auto pull dotfile changes
+# 00 9 * * * /Users/jack/.dotfiles/scripts/pull-dotfiles.sh > /dev/null || $NOTIFY "CronJob" "Failed to pull dotfiles"
 
 # Auto update `tldr`
 @daily /opt/homebrew/bin/tldr --update > /dev/null || $NOTIFY "CronJob" "Failed to auto update tldr"
@@ -71,6 +71,7 @@ VAULTS_DIR="/Users/jack/vaults"
 00 22 * * * $NOTIFY "Reminder" "Get ready for bed!"
 00 20 */2 * * $NOTIFY "Reminder" "Take a shower!" # Every other day @ 8 PM
 00 11,21 * * * $NOTIFY "Reminder" "Brush your teeth!" # 11 AM & 9 PM
+00 10,16,21 * * * $NOTIFY "Reminder" "Did you eat?" # 10 AM, 4 PM, 9 PM
 
 # Bible SMS
 # 00 19 * * * /bin/bash -c "source /Users/jack/.virtualenvs/default/bin/activate && python3 /Users/jack/py/bible-sms.py" || $NOTIFY "CronJob" "Failed to send Bible SMS"
