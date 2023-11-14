@@ -316,16 +316,16 @@ function is_mouse_wiggling(){
 }
 
 function nvim-install(){
-  local target_file="nvim-macos.tar.gz"
-  local target_version="0.9.0"
-  local target_arch=""
-  local url="https://github.com/neovim/neovim/releases/download/v$target_version/$target_file"
-  echo "[*] Downloading $url"
-  curl -LO $url
-  echo "[*] Installing nvim"
-  tar xvf $target_file
-  cp -r nvim-macos/* ~/.local
-  echo "[*] Cleaning up"
-  rm -rf nvim-macos
-  rm $target_file
+    local target_file="nvim-macos.tar.gz"
+    local target_version="0.9.0"
+    local target_arch=""
+    local url="https://github.com/neovim/neovim/releases/download/v$target_version/$target_file"
+    echo "[*] Downloading $url"
+    curl -LO $url
+    echo "[*] Installing nvim"
+    tar xvf $target_file
+    cp -r nvim-macos/* ~/.local
+    echo "[*] Cleaning up"
+    rm -rf nvim-macos
+    rm $target_file
 }

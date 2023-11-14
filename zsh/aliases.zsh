@@ -72,9 +72,6 @@ alias hgrep="histgrep"
 alias :q="exit 0"
 alias bye="exit 0"
 
-# networking
-alias ip="ip -color -brief"
-
 # fzf aliases (including homebrew fzff)
 alias f="fzff | clip"
 alias cdf="fzff_cd"
@@ -99,6 +96,8 @@ if __is_arch_linux; then
     alias open="xdg-open"
     alias clip="xclip -i"
     alias missing-files="pacman -Qk 2>&1 | grep -E ', [1-9][0-9]* missing files'"
+    # networking
+    alias ip="ip -color -brief"
 fi
 
 # MacOS specific aliases
@@ -109,6 +108,8 @@ if __is_mac; then
     alias pip="pip3"
     alias throttle-on="sudo throttle --stop > /dev/null && throttle --down 2000 --up 1000 --rtt 0 --packetLoss 0"
     alias throttle-off="sudo throttle --stop"
+    alias ls-app-store-apps="find /Applications -path '*Contents/_MASReceipt/receipt' -maxdepth 4 -print |\sed 's#.app/Contents/_MASReceipt/receipt#.app#g; s#/Applications/##'"
+    alias cdtofinder="__cd_to_finder"
 fi
 
 # WSL specific aliases

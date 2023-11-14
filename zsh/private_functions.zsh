@@ -161,3 +161,7 @@ function __is_picture_file(){
 function __git_has_uncommitted_changes(){
     test -n "$(git status --porcelain)"
 }
+
+function __cd_to_finder(){
+    cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')"
+}
