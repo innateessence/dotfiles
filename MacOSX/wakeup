@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#This script will be run every time the computer wakes up.
+
+# Kill LegacyScreenSaver
+kill -9 "$(/bin/ps aux | /usr/bin/grep -E '[Ll]egacy[ Ss]creen[ Ss]aver' | /usr/bin/awk '{print $2}')"

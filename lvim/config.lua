@@ -12,9 +12,6 @@ require("user.autocmds")
 require("user.commands")
 require("user.langs.rust") -- Just do it.
 
--- Hack to disable git-blame by default. I only want this info sometimes and currently disabling in `config` doesn't work.
-require('gitblame').disable()
-
 -- Copilot test drive.
 table.insert(lvim.plugins, {
   "zbirenbaum/copilot-cmp",

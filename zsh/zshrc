@@ -28,6 +28,9 @@ if [ -d ~/.dotfiles/zsh ]; then
     source ~/.dotfiles/zsh/hooks.zsh
     source ~/.dotfiles/zsh/prompt.zsh
 
+    # Source plugins
+    source ~/.dotfiles/zsh/plugins/nvm.sh
+
     # Custom function calls
     if __is_mac; then
         mail -e && info "You have mail!"

@@ -23,15 +23,14 @@ GIT_PUSH="/bin/bash /Users/jack/.dotfiles/scripts/mac/cron-git-push.sh"
 # reusable PATHS
 VAULTS_DIR="/Users/jack/vaults"
 
-# HACK: Temp script to kill legacy screensaver periodically if alive too long. MacOS bug.
-# @hourly /opt/homebrew/bin/python3 /Users/jack/.dotfiles/scripts/mac/legacy-screensaver-killer.py 30 || $NOTIFY "CronJob" "Failed to kill screensaver"
-# @hourly /bin/bash /Users/jack/.dotfiles/scripts/mac/legacy-screensaver-killer.sh || $NOTIFY "CronJob" "Failed to kill screensaver"
+# Kill legacy-screensaver every 3 hours
+0 */3 * * * /Users/jack/.dotfiles/scripts/mac/legacy-screensaver-killer.sh || $NOTIFY "CronJob" "Failed to kill legacy-screensaver"
 
 # Jobs to run on bootup
 @reboot /bin/bash /Users/jack/.dotfiles/MacOSX/macosx || $NOTIFY "CronJob" "Failed to run MacOSX config cronjob"
 
 # Automatically move my telegram downloaded images to my telegram pictures folder
-45 8 * * * /bin/bash /Users/jack/.dotfiles/scripts/mac/move-telegram-pics.sh > /dev/null
+@daily /bin/bash /Users/jack/.dotfiles/scripts/mac/move-telegram-pics.sh > /dev/null
 
 # Notify me if brew pkgs need to be upgraded @ 9:00 AM everyday
 @daily /bin/sleep 600 && /Users/jack/.dotfiles/scripts/mac/brew-upgrade-notify.sh > /dev/null || $NOTIFY "CronJob" "Failed to notify outdated brew pkgs"
@@ -55,7 +54,7 @@ VAULTS_DIR="/Users/jack/vaults"
 @daily /opt/homebrew/bin/tldr --update > /dev/null || $NOTIFY "CronJob" "Failed to auto update tldr"
 
 # Auto dump cron env for debugging
-@hourly /bin/mkdir -p /tmp/cron-env && /usr/bin/env > /tmp/cron-env/jack
+# @hourly /bin/mkdir -p /tmp/cron-env ; /usr/bin/env > /tmp/cron-env/jack
 
 # Auto update manpage indexes
 @daily /opt/homebrew/bin/mandb > /dev/null || $NOTIFY "CronJob" "Failed to update manpage"
