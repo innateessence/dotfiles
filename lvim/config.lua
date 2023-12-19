@@ -2,15 +2,21 @@
 -- This will `source` the files in ~/.config/lvim/lua/user/*.lua
 -- Nice and modular and clean. Just the way things should be.
 
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" }) -- specific rust edgecase. Keep me.
+-- NOTE: Enable this when using rust
+-- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" }) -- specific rust edgecase. Keep me.
 
 require("user.general")
-require("user.plugins")
-require("user.lsp")
+require("user.plugins.defaults")
+require("user.plugins.telescope")
+require("user.plugins.treesitter")
+require("user.plugins.plugins")
+require("user.lsp.general")
+require("user.lsp.formatters")
+require("user.lsp.linters")
 require("user.keymaps")
 require("user.autocmds")
 require("user.commands")
-require("user.langs.rust") -- Just do it.
+-- require("user.langs.rust") -- Just do it.
 
 -- Copilot test drive.
 table.insert(lvim.plugins, {

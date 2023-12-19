@@ -329,3 +329,10 @@ function nvim-install(){
     rm -rf nvim-macos
     rm $target_file
 }
+
+
+# function mk-vpn(){
+#     docker run -it --rm --cap-add=NET_ADMIN -p 1194:1194/udp -p 80:8080/tcp \
+#         -e HOST_ADDR=$(curl -s https://api.ipify.org) \
+#         --name dockovpn alekslitvinenk/openvpn"
+# }

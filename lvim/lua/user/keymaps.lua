@@ -20,6 +20,7 @@ lvim.keys.normal_mode["H"] = "<cmd>BufferLineCyclePrev<CR>"
 lvim.builtin.which_key.mappings['w'] = {}
 lvim.builtin.which_key.mappings['q'] = {}
 lvim.builtin.which_key.mappings['h'] = {}
+lvim.builtin.which_key.mappings['/'] = {}
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
@@ -31,6 +32,13 @@ lvim.builtin.which_key.mappings["d"] = {
   q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
   l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+}
+
+lvim.builtin.which_key.mappings["C"] = {
+  name = "Codi",
+  C = { "<cmd>Codi<cr>", "Codi Enable" },
+  c = { "<cmd>Codi!<cr>", "Codi Disable" },
+  d = { "<cmd>CodiExpand<cr>", "Codi expand debug info" },
 }
 
 lvim.builtin.which_key.mappings['g']['B'] = {"<cmd>GitBlameToggle<CR>", "Git Blame Toggle"}

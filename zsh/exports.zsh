@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Pathing
-export PATH="$PATH:$HOME/.local/bin:$HOME/.gem/ruby/2.6.0/bin:$HOME/.luarocks/bin:$HOME/.local/share/lvim/mason/bin:/opt/local/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.gem/ruby/2.6.0/bin:$HOME/.luarocks/bin:$HOME/.local/share/lvim/mason/bin:/opt/local/bin:/opt/homebrew/opt/e2fsprogs/sbin/"
 
 # Misc Pathing
 export DOTFILES_DIR="$HOME/.dotfiles"
@@ -45,6 +45,9 @@ export NETWORK_CHECK_SHELL_TIMEOUT=4  # Timeout value for functions that check v
 
 # Github (gh, hub)
 # export GITHUB_TOKEN="$(pass show personal/github/token/sudo)"
+
+# Pipenv
+export PIPENV_IGNORE_VIRTUALENVS=1  # Force pipenv to create it's own virtualenv instead of using the currently active virtualenv
 
 # WSL specific exports
 if __is_wsl; then

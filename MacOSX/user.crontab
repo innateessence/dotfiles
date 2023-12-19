@@ -24,7 +24,7 @@ GIT_PUSH="/bin/bash /Users/jack/.dotfiles/scripts/mac/cron-git-push.sh"
 VAULTS_DIR="/Users/jack/vaults"
 
 # Kill legacy-screensaver every 3 hours
-0 */3 * * * /Users/jack/.dotfiles/scripts/mac/legacy-screensaver-killer.sh || $NOTIFY "CronJob" "Failed to kill legacy-screensaver"
+0 */3 * * * /Users/jack/.dotfiles/scripts/mac/legacy-screensaver-killer.sh &> /dev/null
 
 # Jobs to run on bootup
 @reboot /bin/bash /Users/jack/.dotfiles/MacOSX/macosx || $NOTIFY "CronJob" "Failed to run MacOSX config cronjob"

@@ -5,9 +5,9 @@ M.ToggleHighlight = function()
   local hl = vim.opt.hlsearch.get(vim.opt.hlsearch)
   vim.opt.hlsearch = not hl
   if hl then
-    print("Enabled hlsearch")
-  else
     print("Disabled hlsearch")
+  else
+    print("Enabled hlsearch")
   end
 end
 
