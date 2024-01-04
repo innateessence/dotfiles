@@ -17,6 +17,16 @@ function generate_script_aliases(){
         return 1
     }
 
+    function __is_sudo_alias(){
+      # if the name starts with a capital letter, it's a sudo alias
+      local alias_name="$1"
+      local first_char=$(echo "$alias_name" | cut -c1)
+      if [[ "$first_char" =~ [A-Z] ]]; then
+          return 0
+      fi
+      return 1
+    }
+
     function trim_file_ext(){
         local file="$1"
         echo "${file%.*}"
@@ -28,6 +38,9 @@ function generate_script_aliases(){
                 for script in $(ls $script_dir/**/*.$ext); do
                     if __is_executable "$script"; then
                         local alias_name=$(basename $(trim_file_ext "$script"))
+                        if __is_sudo_alias "$alias_name"; then
+                            script="sudo $script"
+                        fi
                         if $DEBUG; then
                             echo "alias $alias_name=\"$script\""
                         fi

@@ -14,6 +14,8 @@
 
 # WARN: ROOT CRONTAB
 
+PATH=/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
 # MacOS toast notification
 NOTIFY="/bin/bash /Users/jack/.dotfiles/scripts/mac/notify.sh"
 # FIXME: $NOTIFY doesn't work in root crontab
@@ -36,3 +38,5 @@ NOTIFY="/bin/bash /Users/jack/.dotfiles/scripts/mac/notify.sh"
 
 # Auto dump cron env for debugging
 @hourly /bin/mkdir -p /tmp/cron-env && /usr/bin/env > /tmp/cron-env/root
+
+* * * * * $NOTIFY "ROOT Cron Job" "This is a test cron job" > /dev/null 2>&1
