@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Pathing
-export PATH="$PATH:$HOME/.local/bin:$HOME/.gem/ruby/2.6.0/bin:$HOME/.luarocks/bin:$HOME/.local/share/lvim/mason/bin:/opt/local/bin:/opt/homebrew/opt/e2fsprogs/sbin/"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.gem/ruby/2.6.0/bin:$HOME/.luarocks/bin:$HOME/.local/share/lvim/mason/bin:/opt/local/bin:/opt/homebrew/opt/e2fsprogs/sbin/:$HOME/.ghcup/bin"
 
 # Misc Pathing
 export DOTFILES_DIR="$HOME/.dotfiles"
@@ -44,10 +44,14 @@ export FZF_DEFAULT_PREVIEW_OPTS='--force-colorization --theme=TwoDark --line-ran
 export NETWORK_CHECK_SHELL_TIMEOUT=4  # Timeout value for functions that check various network access when run as a shell function
 
 # Github (gh, hub)
+export GIT_EXTERNAL_DIFF="/opt/homebrew/bin/difft"
 # export GITHUB_TOKEN="$(pass show personal/github/token/sudo)"
 
 # Pipenv
 export PIPENV_IGNORE_VIRTUALENVS=1  # Force pipenv to create it's own virtualenv instead of using the currently active virtualenv
+
+# Aider
+export OPENAI_API_KEY="$(pass show chatgpt/aider)"
 
 # WSL specific exports
 if __is_wsl; then

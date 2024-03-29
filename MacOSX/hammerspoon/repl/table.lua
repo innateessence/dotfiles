@@ -1,4 +1,4 @@
--- Lua Table View by Elertan (personally modified)
+-- Lua Table View originally by Elertan (modified)
 table.print = function(t, recursive, exclusions)
     local nests = 0
     if not recursive then recursive = false end

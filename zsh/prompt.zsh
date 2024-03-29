@@ -7,6 +7,15 @@
 #
 # }
 
+function __set_arch_indicator(){
+  # Tell me if I'm emulating x86_64 on Apple Silicon CPU (Arm64)
+  if [[ $(uname -m) == "x86_64" && $(uname) == "Darwin" ]]; then
+    __ARCH_INDICATOR="(x64) "
+  else
+    __ARCH_INDICATOR=""
+  fi
+}
+
 function __set_cwd_indicator(){
     # Essentially just formats $(pwd) into my preferred short-hand format
     # Store into a global variable to actually use this. This needs to behave like a callback function who's only job is to modify state.
@@ -51,13 +60,14 @@ function __set_all_indicators(){
     __set_vi_indicator
     __set_cwd_indicator
     __set_venv_indicator
+    __set_arch_indicator
 }
 
 function zle-line-init zle-keymap-select {
     local __EXIT_CODE="%(?.%F{green}.%F{red})%?%f"                  # Colorize exit code. Fetch this before making any other calls
     __set_all_indicators                                            # Update global indicator variables
 
-    PROMPT="$__VENV_INDICATOR $__HPWD $__VI_INDICATOR \$ "          # Left prompt
+    PROMPT="$__ARCH_INDICATOR$__VENV_INDICATOR $__HPWD $__VI_INDICATOR \$ "          # Left prompt
     RPROMPT="$__EXIT_CODE"                                            # Right prompt
     zle reset-prompt
 }

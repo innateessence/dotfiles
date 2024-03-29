@@ -33,7 +33,7 @@ alias gff="git pull --ff-only"
 alias gopen="__open_repo"
 alias branch="gb"
 alias lspr="gh pr list --search 'review:required review-requested:@me'"
-# alias propen="gh pr view --web" # TODO: Make this built ontop of git
+# alias propen="gh pr view --web" # TODO: Make this built on top of git
 
 # Kitty kitten aliases
 alias icat="kitty +kitten icat"
@@ -55,8 +55,9 @@ alias mnt="mount | grep -E ^/dev | column -t | sort"
 alias wget="wget -c" # resume downloads by default
 alias bashfoo="__browser_open https://tldp.org/LDP/abs/html/"
 alias du-gui="ncdu"
-alias hexdump="od -A x -t x1z -v"
+alias hexdump="od -A x -t x1 -v"
 alias pip-upgrade-all="pip list --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+alias get-proxies="docker run --rm bluet/proxybroker2 find --types HTTP HTTPS --lvl High --countries US --strict -l 10 2>&1 | grep -o -E '\d+\.\d+\.\d+\.\d+\:\d+'"
 
 # Music aliases
 alias lofi='mpv --no-video "https://play.streamafrica.net/lofiradio"'
@@ -118,6 +119,7 @@ if __is_wsl; then
 fi
 
 # Unset aliases if the expected dependency doesn't exist in path
+if ! command -v bpython   &> /dev/null;  then unalias bpy          ; fi
 if ! command -v bpython   &> /dev/null;  then unalias bpy          ; fi
 if ! command -v ptpython  &> /dev/null;  then unalias ppy          ; fi
 if ! command -v hs        &> /dev/null;  then unalias http-status  ; fi

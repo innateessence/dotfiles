@@ -10,6 +10,8 @@ function command_exists(){ command -v "$1" &> /dev/null; }
 function file_exists() { [[ -a "$1" ]] ; }
 function directory_exists() { [[ -d "$1" ]] ; }
 function work() { source $DOTFILES_DIR/zsh/work-functions.zsh ; }
+function get_dir() { echo $( dirname "$(realpath "$1")" ) ; } # A better version of `dirname`
+function beep_me(){ for i in {0..${1:-25}}; do printf "\a" && sleep 0.1 ; done ; }
 
 # One-liners (Misc)
 function lsports(){ netstat -Watnlv | grep LISTEN | awk '{"ps -ww -o args= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|" ; }
@@ -199,16 +201,16 @@ function ve(){
     fi
     local COMMAND_QUEUE=()  # A hacky way to create a queue of commands to run after parsing args
 
-    function is_in_ve(){ test "$VIRTUAL_ENV" ; }
-    function ve_exists(){ directory_exists "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" ; }
-    function mk_ve(){ ve_exists && rm_ve ; python -m venv "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" && msg "Created VirtualEnv $TARGET_VIRTUALENV" ; }
-    function mk_ve_if_not_exists(){ if ! ve_exists; then mk_ve; fi }
-    function rm_ve(){ rm -rf "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" && msg "Removed VirtualEnv $TARGET_VIRTUALENV" ; }
-    function deactivate_ve(){ is_in_ve && deactivate && info "Deactivated VirtualEnv" && unset VIRTUAL_ENV ; }
-    function toggle_ve(){ is_in_ve && deactivate_ve || activate_ve ; }
-    function activate_ve(){ ! is_in_ve && mk_ve_if_not_exists && source "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV/bin/activate" && info "Activated VirtualEnv: $TARGET_VIRTUALENV" ; }
-    function ve_info(){ info "Current VirtualEnv: $(basename $VIRTUAL_ENV)" ; }
-    function print_help(){
+    local function is_in_ve(){ test "$VIRTUAL_ENV" ; }
+    local function ve_exists(){ directory_exists "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" ; }
+    local function mk_ve(){ ve_exists && rm_ve ; python -m venv "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" && msg "Created VirtualEnv $TARGET_VIRTUALENV" ; }
+    local function mk_ve_if_not_exists(){ if ! ve_exists; then mk_ve; fi }
+    local function rm_ve(){ rm -rf "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" && msg "Removed VirtualEnv $TARGET_VIRTUALENV" ; }
+    local function deactivate_ve(){ is_in_ve && deactivate && info "Deactivated VirtualEnv" && unset VIRTUAL_ENV ; }
+    local function toggle_ve(){ is_in_ve && deactivate_ve || activate_ve ; }
+    local function activate_ve(){ ! is_in_ve && mk_ve_if_not_exists && source "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV/bin/activate" && info "Activated VirtualEnv: $TARGET_VIRTUALENV" ; }
+    local function ve_info(){ info "Current VirtualEnv: $(basename $VIRTUAL_ENV)" ; }
+    local function print_help(){
         echo "Usage: ve [options]"
         echo
         echo "Options:"
@@ -314,6 +316,7 @@ function is_mouse_wiggling(){
         echo "No"
     fi
 }
+
 
 function nvim-install(){
     local target_file="nvim-macos.tar.gz"

@@ -14,6 +14,8 @@
 
 # WARN: ROOT CRONTAB
 
+PATH=/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
 # MacOS toast notification
 NOTIFY="/bin/bash /Users/jack/.dotfiles/scripts/mac/notify.sh"
 # FIXME: $NOTIFY doesn't work in root crontab
@@ -29,10 +31,15 @@ NOTIFY="/bin/bash /Users/jack/.dotfiles/scripts/mac/notify.sh"
 @hourly /usr/bin/crontab -l > /Users/jack/.dotfiles/MacOSX/root.crontab 
 
 # Auto update ad blocking hosts file
-@daily /opt/homebrew/bin/hblock 
+# @daily /opt/homebrew/bin/hblock 
 
 # Auto download OS updates
 @daily /usr/sbin/softwareupdate --background -a -d > /dev/null 2>&1 
 
 # Auto dump cron env for debugging
 @hourly /bin/mkdir -p /tmp/cron-env && /usr/bin/env > /tmp/cron-env/root
+
+# Auto switch to low power mode
+*/5 * * * * /bin/bash /Users/jack/.dotfiles/scripts/mac/battery/low-powermode-on-low-battery-cron.sh
+
+* * * * * $NOTIFY "ROOT Cron Job" "This is a test cron job" > /dev/null 2>&1

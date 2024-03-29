@@ -23,5 +23,8 @@
 lvim.builtin.telescope.defaults.file_ignore_patterns = {
   "node%_modules/.*",
   "%.yarn",
-  "**/dist"
+  "**/dist",
+  "**/*.min.js",
+  ".pnp.loader.mjs",
+  ".pnp.cjs"
 }

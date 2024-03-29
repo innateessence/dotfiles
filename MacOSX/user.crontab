@@ -12,6 +12,8 @@
 
 # Redirecting stdin & stderr to /dev/null will silence `mail` output for cronjob :)
 
+PATH=/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
 # reusable scripts
 NOTIFY="/bin/bash /Users/jack/.dotfiles/scripts/mac/notify.sh"
 # $NOTIFY $TITLE $MESSAGE
@@ -33,7 +35,7 @@ VAULTS_DIR="/Users/jack/vaults"
 @daily /bin/bash /Users/jack/.dotfiles/scripts/mac/move-telegram-pics.sh > /dev/null
 
 # Notify me if brew pkgs need to be upgraded @ 9:00 AM everyday
-@daily /bin/sleep 600 && /Users/jack/.dotfiles/scripts/mac/brew-upgrade-notify.sh > /dev/null || $NOTIFY "CronJob" "Failed to notify outdated brew pkgs"
+@daily /bin/sleep 600 && /Users/jack/.dotfiles/scripts/mac/brew-upgrade-notify.sh &> /dev/null || $NOTIFY "CronJob" "Failed to notify outdated brew pkgs"
 
 # Auto update lvim tree-sitter parsers
 # @daily /Users/jack/.local/bin/lvim +'TSUpdateSync all' +:q || $NOTIFY "CronJob" "Failed to update lvim tree-sitter parsers"
@@ -42,7 +44,7 @@ VAULTS_DIR="/Users/jack/vaults"
 # @daily /Users/jack/.local/bin/lvim +'LvimUpdate' +:q || $NOTIFY "CronJob" "Failed to update lvim plugins"
 
 # Auto update Brewfile dump
-30 9 * * * /bin/rm /Users/jack/.dotfiles/MacOSX/Brewfile && /opt/homebrew/bin/brew bundle dump --file /Users/jack/.dotfiles/MacOSX/Brewfile || $NOTIFY "CronJob" "Failed to dump Brewfile"
+30 9 * * * /bin/rm /Users/jack/.dotfiles/MacOSX/Brewfile && /opt/homebrew/bin/brew bundle dump --file /Users/jack/.dotfiles/MacOSX/Brewfile &> /dev/null || $NOTIFY "CronJob" "Failed to dump Brewfile"
 
 # Auto update user crontab dump every hour
 @hourly /usr/bin/crontab -l > /Users/jack/.dotfiles/MacOSX/user.crontab || $NOTIFY "CronJob" "Failed to dump user crontab"
@@ -57,7 +59,7 @@ VAULTS_DIR="/Users/jack/vaults"
 # @hourly /bin/mkdir -p /tmp/cron-env ; /usr/bin/env > /tmp/cron-env/jack
 
 # Auto update manpage indexes
-@daily /opt/homebrew/bin/mandb > /dev/null || $NOTIFY "CronJob" "Failed to update manpage"
+@daily /opt/homebrew/bin/mandb &> /dev/null || $NOTIFY "CronJob" "Failed to update manpage"
 
 # Auto update Obsidian Vaults
 # 00 9 * * * $GIT_PULL $VAULTS_DIR || $NOTIFY "CronJob" "Failed to pull Obsidian Vaults"
@@ -72,5 +74,14 @@ VAULTS_DIR="/Users/jack/vaults"
 00 11,21 * * * $NOTIFY "Reminder" "Brush your teeth!" # 11 AM & 9 PM
 00 10,16,21 * * * $NOTIFY "Reminder" "Did you eat?" # 10 AM, 4 PM, 9 PM
 
-# Bible SMS
-# 00 19 * * * /bin/bash -c "source /Users/jack/.virtualenvs/default/bin/activate && python3 /Users/jack/py/bible-sms.py" || $NOTIFY "CronJob" "Failed to send Bible SMS"
+# 00 * * * * /bin/bash /Users/jack/checkRabbit/checkRabbit.sh &> /dev/null
+
+# Notify if there's no dataflow at 8:30 PM (standup time)
+30 8 * * * /bin/bash /Users/jack/work/scripts/notify-no-dataflow.sh
+
+
+# Automatically delete old SQL dumps to save space
+00 * * * * cd /Users/jack/work/dumps && /Users/jack/.virtualenvs/default/bin/python3 clean_sql_dumps.py &> /dev/null
+
+# Automatically download the latest logs
+00 * * * * cd /Users/jack/roadz/validate-uam-data && /bin/bash sync-from-s3.sh &> /dev/null

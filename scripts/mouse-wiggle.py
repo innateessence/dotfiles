@@ -13,6 +13,11 @@ from argparse import ArgumentParser
 def parse_args():
     parser = ArgumentParser(description="Wiggle the mouse")
     parser.add_argument(
+        "until",
+        nargs="?",
+        help="when no flag is provided, we're passing args as args to --until",
+    )
+    parser.add_argument(
         "--until",
         type=str,
         help="Stop after this time has passed. Format: 1s, 1m, 1h, 1d, 1w",
@@ -28,11 +33,6 @@ def parse_args():
         "--delay", type=float, default=60, help="Delay in between mouse wiggles"
     )
     parser.add_argument("--debug", action="store_true", help="Print debug messages")
-    parser.add_argument(
-        "_until",
-        nargs="?",
-        help="alias for --until. when no flag is provided, assume we're giving --until",
-    )
     return parser.parse_args()
 
 
@@ -79,8 +79,6 @@ def sleep_loop(sleep_time, until_time):
 
 if __name__ == "__main__":
     args = parse_args()
-    if args._until:
-        args.until = args._until
     until_time = parse_until_time(args.until)
     while datetime.now() < until_time:
         wiggle(args)

@@ -16,7 +16,7 @@ require("user.lsp.linters")
 require("user.keymaps")
 require("user.autocmds")
 require("user.commands")
--- require("user.langs.rust") -- Just do it.
+require("user.langs.rust") -- Just do it.
 
 -- Copilot test drive.
 table.insert(lvim.plugins, {
@@ -27,8 +27,8 @@ table.insert(lvim.plugins, {
   config = function()
     vim.defer_fn(function()
       require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
+        suggestion = { enabled = true },
+        panel = { enabled = true },
       })                             -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
       require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
     end, 100)
