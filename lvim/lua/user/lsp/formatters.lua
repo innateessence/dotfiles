@@ -27,7 +27,9 @@ formatters.setup {
   {
     command = "yamlfix",
     filetypes = { "yaml", "yml" },
-
+  },
+  {
+    command = "fixjson",
+    filetypes = { "json" },
   }
 }
-

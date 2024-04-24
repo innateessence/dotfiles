@@ -56,6 +56,7 @@ alias wget="wget -c" # resume downloads by default
 alias bashfoo="__browser_open https://tldp.org/LDP/abs/html/"
 alias du-gui="ncdu"
 alias hexdump="od -A x -t x1 -v"
+alias Hexdump="sudo hexdump"
 alias pip-upgrade-all="pip list --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias get-proxies="docker run --rm bluet/proxybroker2 find --types HTTP HTTPS --lvl High --countries US --strict -l 10 2>&1 | grep -o -E '\d+\.\d+\.\d+\.\d+\:\d+'"
 

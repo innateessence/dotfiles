@@ -82,6 +82,3 @@ VAULTS_DIR="/Users/jack/vaults"
 
 # Automatically delete old SQL dumps to save space
 00 * * * * cd /Users/jack/work/dumps && /Users/jack/.virtualenvs/default/bin/python3 clean_sql_dumps.py &> /dev/null
-
-# Automatically download the latest logs
-00 * * * * cd /Users/jack/roadz/validate-uam-data && /bin/bash sync-from-s3.sh &> /dev/null
