@@ -66,7 +66,6 @@ brew "llvm"
 brew "lsd"
 brew "luarocks"
 brew "man-db"
-brew "memcached", restart_service: true
 brew "mkcert"
 brew "mpv"
 brew "ncdu"

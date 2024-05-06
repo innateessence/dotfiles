@@ -51,7 +51,7 @@ export GIT_EXTERNAL_DIFF="/opt/homebrew/bin/difft"
 export PIPENV_IGNORE_VIRTUALENVS=1  # Force pipenv to create it's own virtualenv instead of using the currently active virtualenv
 
 # Aider
-export OPENAI_API_KEY="$(pass show chatgpt/aider)"
+# export OPENAI_API_KEY="$(pass show chatgpt/aider)"
 
 # WSL specific exports
 if __is_wsl; then
