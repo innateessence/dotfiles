@@ -10,7 +10,7 @@ alias cat="bat"
 alias extract="untar"
 alias markdown="glow"
 alias luash="luap"
-alias beep="echo -e \a"
+alias beep="printf '\a'"
 
 # cd aliases
 alias ~="cd ~"

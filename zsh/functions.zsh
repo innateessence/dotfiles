@@ -12,6 +12,7 @@ function directory_exists() { [[ -d "$1" ]] ; }
 function work() { source $DOTFILES_DIR/zsh/work-functions.zsh ; }
 function get_dir() { echo $( dirname "$(realpath "$1")" ) ; } # A better version of `dirname`
 function beep_me(){ for i in {0..${1:-25}}; do printf "\a" && sleep 0.1 ; done ; }
+function pids_mem(){ ps -p $1 -o rss | grep -v "RSS" | numfmt --to=iec ; } # gets (real) resident memory usage of a process
 
 # One-liners (Misc)
 function lsports(){ netstat -Watnlv | grep LISTEN | awk '{"ps -ww -o args= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|" ; }

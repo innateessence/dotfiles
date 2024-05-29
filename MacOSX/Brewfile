@@ -16,7 +16,7 @@ brew "awslogs"
 brew "bat"
 brew "bpython"
 brew "freetype"
-brew "glib", link: false
+brew "glib"
 brew "cairo"
 brew "cheat"
 brew "choose-gui"
