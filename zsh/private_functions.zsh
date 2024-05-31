@@ -57,7 +57,7 @@ function __determine_shell(){
     local shells
     shells=(zsh bash)
     for shell in "${shells[@]}"; do
-        if [[ "$SHELL" == *"$shell" ]]; then;
+        if [[ "$SHELL" == *"$shell" ]]; then
             echo "$shell"
             return
         fi

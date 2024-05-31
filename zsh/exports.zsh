@@ -2,7 +2,6 @@
 
 # Pathing
 export PATH="$HOME/.local/bin:$PATH:/opt/local/bin:/opt/homebrew/opt/e2fsprogs/sbin/:$HOME/.ghcup/bin:$HOME/.gem/ruby/2.6.0/bin:$HOME/.luarocks/bin:$HOME/.local/share/lvim/mason/bin"
-typeset -U PATH path # Remove any duplicates in $PATH. Keep $PATH explicit for cross system compatibility reasons.
 
 # Misc Pathing
 export DOTFILES_DIR="$HOME/.dotfiles"

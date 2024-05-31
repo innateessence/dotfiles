@@ -16,6 +16,7 @@ function pids_mem(){ ps -p $1 -o rss | grep -v "RSS" | numfmt --to=iec ; } # get
 
 # One-liners (Misc)
 function lsports(){ netstat -Watnlv | grep LISTEN | awk '{"ps -ww -o args= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|" ; }
+# function lsportprogs(){ lsports | grep -o -E "name:.+" | sed 's/name: //g' | sort | uniq | sed 's/--.*//g' ; }
 function gen_pass(){ echo $(base64 < /dev/urandom | tr -d 'O0Il1+/' | head -c 16) | clip ; }
 # function has_connections(){ has_internet_access && has_git_access || return 1 ; }
 function outdated_pkgs(){ info "Outdated Packages:" $(__outdated_pkgs) ; }
@@ -114,7 +115,7 @@ function reload(){
     local rc_file
     old_cwd=$(pwd) || $HOME
     rc_file="$(__determine_rc_file)"
-    source $rc_file
+    source "$rc_file"
     cd "$old_cwd"
 }
 

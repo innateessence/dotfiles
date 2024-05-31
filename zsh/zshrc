@@ -1,35 +1,32 @@
 #!/usr/bin/env zsh
 
+function __source_mac(){
+  # init Homebrew
+  if [ "$(arch)" = "arm64" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  else
+    # emulate arch -x86_64 zsh on arm64
+    eval "$(/usr/local/bin/brew shellenv)"
+    WINEPREFIX=~/my-game-prefix
+    # $(brew --prefix game-porting-toolkit)/bin/wine64 winecfg
+  fi
 
-# Mac OS
-if command -v brew &> /dev/null; then
+  # Zsh syntax highlighting
+  if test -f "$(brew --prefix)"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; then
+    source "$(brew --prefix)"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  fi
 
-    # init Homebrew
-    if [ "$(arch)" = "arm64" ]; then
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-    else
-        # emulate arch -x86_64 zsh on arm64
-        eval "$(/usr/local/bin/brew shellenv)"
-        WINEPREFIX=~/my-game-prefix
-        # $(brew --prefix game-porting-toolkit)/bin/wine64 winecfg
-    fi
+  # fzf
+  command -v fzf &> /dev/null && FZF_VERSION=$(fzf --version | awk '{print $1}')
+  if test -n "$FZF_VERSION"; then
+    source /opt/homebrew/Cellar/fzf/$FZF_VERSION/shell/completion.zsh
+    source /opt/homebrew/Cellar/fzf/$FZF_VERSION/shell/key-bindings.zsh
+  fi
+}
 
-    # Zsh syntax highlighting
-    if test -f "$(brew --prefix)"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; then
-        source "$(brew --prefix)"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    fi
-
-    # fzf
-    command -v fzf &> /dev/null && FZF_VERSION=$(fzf --version | awk '{print $1}')
-    if test -n "$FZF_VERSION"; then
-      source /opt/homebrew/Cellar/fzf/$FZF_VERSION/shell/completion.zsh
-      source /opt/homebrew/Cellar/fzf/$FZF_VERSION/shell/key-bindings.zsh
-    fi
- 
-fi
-
-# Arch Linux
-if command -v pacman &> /dev/null; then
+function __source_arch_linux(){
+  # Arch Linux
+  if command -v pacman &> /dev/null; then
     # Zsh
     if test -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; then
       source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -43,12 +40,18 @@ if command -v pacman &> /dev/null; then
     if test -f ~/.fzf.zsh; then
       source ~/.fzf.zsh
     fi
-fi
+  fi
+}
 
 # Source custom dotfiles  -  sourced individually to ensure exports.zsh sourced nearly first.
 if [ -d ~/.dotfiles/zsh ]; then
     source ~/.dotfiles/zsh/private_functions.zsh
     source ~/.dotfiles/zsh/exports.zsh
+    if __is_mac; then
+      __source_mac
+    elif __is_arch_linux; then
+      __source_arch
+    fi
     source ~/.dotfiles/zsh/aliases.zsh
     source ~/.dotfiles/zsh/script-aliases.zsh
     source ~/.dotfiles/zsh/functions.zsh
@@ -78,3 +81,7 @@ if [ -d ~/.dotfiles/zsh ]; then
     # (bash $DOTFILES_DIR/scripts/check-connection.sh &)
     # (bash $DOTFILES_DIR/scripts/ls-prs.sh &)
 fi
+
+
+# NOTE: This MUST be sourced lasted to avoid some strange edge cases sometimes
+typeset -U PATH path # Remove any duplicates in $PATH. Keep $PATH explicit for cross system compatibility reasons.
