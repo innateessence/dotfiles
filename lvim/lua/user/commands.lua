@@ -11,6 +11,7 @@ M.ToggleHighlight = function()
   end
 end
 
+
 -- define Vim commands (vimscript)
 -- vim.cmd([[command! CommandName lua FunctionName('%s/\\s\\+$//ge')]])
 

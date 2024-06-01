@@ -32,6 +32,15 @@ linters.setup {
     filetypes = { "yaml", "yml" },
   },
   {
+    command = "markdownlint",
+    extra_args = { "--disable", "MD033", "--disable", "MD041" },
+    filetypes = { "html", "markdown" },
+  },
+  {
+    command = "markuplint",
+    filetypes = { "html" },
+  },
+  {
     command = "jsonlint",
     filetypes = { "json" },
   }
