@@ -83,5 +83,5 @@ if [ -d ~/.dotfiles/zsh ]; then
 fi
 
 
-# NOTE: This MUST be sourced lasted to avoid some strange edge cases sometimes
+# NOTE: This MUST be evaluated last to avoid some strange edge cases sometimes
 typeset -U PATH path # Remove any duplicates in $PATH. Keep $PATH explicit for cross system compatibility reasons.

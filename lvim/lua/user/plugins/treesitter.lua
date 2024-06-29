@@ -10,7 +10,7 @@ lvim.builtin.treesitter.rainbow.enable = true
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
-  "javascript",
+  -- "javascript",
   "json",
   "lua",
   "python",
