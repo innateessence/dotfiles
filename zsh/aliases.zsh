@@ -112,6 +112,7 @@ if __is_mac; then
     alias throttle-off="sudo throttle --stop"
     alias ls-app-store-apps="find /Applications -path '*Contents/_MASReceipt/receipt' -maxdepth 4 -print |\sed 's#.app/Contents/_MASReceipt/receipt#.app#g; s#/Applications/##'"
     alias cdtofinder="__cd_to_finder"
+    alias hexedit="/Applications/ImHex.app/Contents/MacOS/imhex"
 fi
 
 # WSL specific aliases
