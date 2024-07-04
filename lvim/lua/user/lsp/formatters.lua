@@ -31,5 +31,9 @@ formatters.setup {
   {
     command = "fixjson",
     filetypes = { "json" },
+  },
+  {
+    command = "asmfmt",
+    filetypes = { "asm" },
   }
 }
