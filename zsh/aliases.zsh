@@ -113,6 +113,7 @@ if __is_mac; then
     alias ls-app-store-apps="find /Applications -path '*Contents/_MASReceipt/receipt' -maxdepth 4 -print |\sed 's#.app/Contents/_MASReceipt/receipt#.app#g; s#/Applications/##'"
     alias cdtofinder="__cd_to_finder"
     alias hexedit="/Applications/ImHex.app/Contents/MacOS/imhex"
+    alias x86_64="arch -x86_64"
 fi
 
 # WSL specific aliases
