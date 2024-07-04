@@ -35,5 +35,10 @@ formatters.setup {
   {
     command = "asmfmt",
     filetypes = { "asm" },
+  },
+  {
+    command = "clang-format",
+    filetypes = { "c", "cpp" },
+    extra_args = { "--style", "{IndentWidth: 4}" }
   }
 }

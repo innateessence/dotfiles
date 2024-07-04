@@ -1,6 +1,5 @@
 -- This is the init file for LunarVim.
 -- This will `source` the files in ~/.config/lvim/lua/user/*.lua
--- Nice and modular and clean. Just the way things should be.
 
 -- NOTE: Enable this when using rust
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" }) -- specific rust edgecase. Keep me.
@@ -17,6 +16,7 @@ require("user.keymaps")
 require("user.autocmds")
 require("user.commands")
 require("user.langs.rust") -- Just do it.
+require("user.langs.c")
 
 -- Copilot test drive.
 table.insert(lvim.plugins, {
