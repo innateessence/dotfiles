@@ -5,6 +5,8 @@ export PATH="$HOME/.local/bin:$PATH:/opt/local/bin:/opt/homebrew/opt/e2fsprogs/s
 
 export GO_PATH="$HOME/go"
 export ERG_PATH="$HOME/.erg"
+export CC="gcc"
+export CXX="g++"
 
 # Misc Pathing
 export DOTFILES_DIR="$HOME/.dotfiles"

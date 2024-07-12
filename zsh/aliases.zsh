@@ -91,6 +91,9 @@ alias lvimdiff='lvim -d'
 # Sudo alias
 alias sudo="sudo -E" # preserve env by default.
 
+# Programming language specific aliases
+alias lspysig="ag --no-numbers -s -G '.py' '(def .+|class .+)' --color-match '0'" # ls python signatures
+
 # ArchLinux specific aliases
 if __is_arch_linux; then
     alias Pacman="sudo pacman"
@@ -113,7 +116,7 @@ if __is_mac; then
     alias ls-app-store-apps="find /Applications -path '*Contents/_MASReceipt/receipt' -maxdepth 4 -print |\sed 's#.app/Contents/_MASReceipt/receipt#.app#g; s#/Applications/##'"
     alias cdtofinder="__cd_to_finder"
     alias hexedit="/Applications/ImHex.app/Contents/MacOS/imhex"
-    alias x86_64="arch -x86_64"
+    alias x86_64="arch -x86_64 zsh"
 fi
 
 # WSL specific aliases
