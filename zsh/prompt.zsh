@@ -8,12 +8,12 @@
 # }
 
 function __set_arch_indicator(){
-  # Tell me if I'm emulating x86_64 on Apple Silicon CPU (Arm64)
-  if [[ $(uname -m) == "x86_64" && $(uname) == "Darwin" ]]; then
-    __ARCH_INDICATOR="(x64) "
-  else
-    __ARCH_INDICATOR=""
-  fi
+    # Tell me if I'm emulating x86_64 on Apple Silicon CPU (Arm64)
+    if [[ $(uname -m) == "x86_64" && $(uname) == "Darwin" ]]; then
+        __ARCH_INDICATOR="(x64) "
+    else
+        __ARCH_INDICATOR=""
+    fi
 }
 
 function __set_cwd_indicator(){
@@ -28,9 +28,9 @@ function __set_cwd_indicator(){
     local right_path
 
     if [[ ${#arr[@]} -ge 4 ]]; then
-      right_path="${arr[@]: -1,-2}"
-      left_path="${arr[@]: 0:2}"
-      __HPWD="$left_path ⇨ $right_path"
+        right_path="${arr[@]: -1,-2}"
+        left_path="${arr[@]: 0:2}"
+        __HPWD="$left_path ⇨ $right_path"
     elif [[ ${#arr[@]} -ge 3 ]]; then
         right_path="${arr[@]: -1}"
         left_path="${arr[@]: 0:2}"

@@ -8,7 +8,7 @@
 -- an executable
 
 -- -- set additional linters
-local linters = require "lvim.lsp.null-ls.linters"
+local linters = require("lvim.lsp.null-ls.linters")
 linters.setup {
   -- {
   --   command = "flake8",

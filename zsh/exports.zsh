@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Pathing
-export PATH="$HOME/.local/bin:$PATH:/opt/local/bin:/opt/homebrew/opt/e2fsprogs/sbin/:$HOME/.ghcup/bin:$HOME/.gem/ruby/2.6.0/bin:$HOME/.luarocks/bin:$HOME/.cargo/bin:$HOME/.local/share/lvim/mason/bin"
+export PATH="$HOME/.local/bin:$PATH:/opt/local/bin:$HOME/.ghcup/bin:$HOME/.cargo/bin:$HOME/.gem/ruby/2.6.0/bin:$HOME/.luarocks/bin::$HOME/.local/share/lvim/mason/bin:/opt/homebrew/opt/e2fsprogs/sbin/"
 
 export GO_PATH="$HOME/go"
 export ERG_PATH="$HOME/.erg"

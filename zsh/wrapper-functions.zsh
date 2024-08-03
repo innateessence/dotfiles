@@ -4,6 +4,10 @@
 # Essentially, any function that houses the same namespace as an existing program goes here.
 # And some that just wrap on top of an existing binary
 
+function vf(){
+    lvim $(fzff)
+}
+
 function fzff(){
     # short for fzf files or fuzzy find files.
     # I like `fzf` to show me pretty previews of the files when run without args.
@@ -17,18 +21,18 @@ function fzff(){
 
 
 function fzff_cd(){
-  # short for change directory to fzf file.
-  local target_dir=$(dirname $(fzff))
-  if directory_exists $target_dir; then
-    cd $target_dir
-  fi
+    # short for change directory to fzf file.
+    local target_dir=$(dirname $(fzff))
+    if directory_exists $target_dir; then
+        cd $target_dir
+    fi
 }
 
 function fzf_exec(){
-  # Short for fuzzy find exec
-  # Searches shell history & executes the command
-  local command=$(hist | fzf)
-  __write_to_current_stdin $command
+    # Short for fuzzy find exec
+    # Searches shell history & executes the command
+    local command=$(hist | fzf)
+    __write_to_current_stdin $command
 }
 
 function tmux(){

@@ -30,7 +30,7 @@ def parse_args():
         help="Duration for the mouse wiggle in seconds",
     )
     parser.add_argument(
-        "--delay", type=float, default=60, help="Delay in between mouse wiggles"
+        "--delay", type=float, default=30, help="Delay in between mouse wiggles"
     )
     parser.add_argument("--debug", action="store_true", help="Print debug messages")
     return parser.parse_args()
@@ -60,6 +60,10 @@ def parse_until_time(until):
 def wiggle(args):
     offset_x = random.randint(-1, 1)
     offset_y = random.randint(-1, 1)
+    while offset_x == 0:
+        offset_x = random.randint(-1, 1)
+    while offset_y == 0:
+        offset_y = random.randint(-1, 1)
     if args.debug:
         print("offset_x: ", offset_x, end="")
         print(" offset_y: ", offset_y, end="")

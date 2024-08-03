@@ -18,13 +18,13 @@ function generate_script_aliases(){
     }
 
     function __is_sudo_alias(){
-      # if the name starts with a capital letter, it's a sudo alias
-      local alias_name="$1"
-      local first_char=$(echo "$alias_name" | cut -c1)
-      if [[ "$first_char" =~ [A-Z] ]]; then
-          return 0
-      fi
-      return 1
+        # if the name starts with a capital letter, it's a sudo alias
+        local alias_name="$1"
+        local first_char=$(echo "$alias_name" | cut -c1)
+        if [[ "$first_char" =~ [A-Z] ]]; then
+            return 0
+        fi
+        return 1
     }
 
     function trim_file_ext(){
