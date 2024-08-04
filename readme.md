@@ -9,3 +9,6 @@
 * `bash mk-symlinks.sh` from any subdirectory to install the configs present in that subdirectory alone
 * Basically this just makes symbolic links to the appropriate directories.
 * The 'install' will fail silently if you already have these directories present, delete them manually for reasons.
+
+## Just looking for goodies?
+* Checkout the [zsh](zsh) directory
