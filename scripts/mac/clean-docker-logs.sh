@@ -24,8 +24,10 @@ function wipe_log(){
 
 function Main(){
     for log_file in "$LOG_PATH"/* ; do
-        wipe_log "$LOG_PATH/$log_file" "$VERBOSE"
+        wipe_log "$log_file" "$VERBOSE"
     done
+
+    du -sh "$LOG_PATH"
 }
 
 Main

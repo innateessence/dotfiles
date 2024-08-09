@@ -5,7 +5,11 @@
 # And some that just wrap on top of an existing binary
 
 function vf(){
-    lvim $(fzff)
+  local filename
+  filename=$(fzff)
+  if [ -n "$filename" ]; then
+    lvim $filename
+  fi
 }
 
 function fzff(){
