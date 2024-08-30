@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-# insert mode in vim behaves kinda like emacs with these bindings.
+# insert mode in vim mode behaves kinda like emacs with these bindings.
 # emacs is a nice default but having vim-power directly in my shell on-demand by hitting [esc] is always great
 # These bindings give me the best of both worlds.
 
