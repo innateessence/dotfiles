@@ -7,15 +7,17 @@ from datetime import datetime, timedelta
 
 from argparse import ArgumentParser
 
-# Keep my Mac awake. Was faster to write this than to find a solution that keeps the network connection alive.
+# Keep my MacBook awake. Was faster to write this than to find a solution that keeps the network connection alive.
+# In hindsight, caffeinate would have been a good solution. But this was fun.
 
 
 def parse_args():
     parser = ArgumentParser(description="Wiggle the mouse")
     parser.add_argument(
-        "until",
+        "_until",
         nargs="?",
         help="when no flag is provided, we're passing args as args to --until",
+        default=None,
     )
     parser.add_argument(
         "--until",
@@ -33,7 +35,10 @@ def parse_args():
         "--delay", type=float, default=30, help="Delay in between mouse wiggles"
     )
     parser.add_argument("--debug", action="store_true", help="Print debug messages")
-    return parser.parse_args()
+    args = parser.parse_args()
+    if args._until:
+        args.until = args._until
+    return args
 
 
 def parse_until_time(until):

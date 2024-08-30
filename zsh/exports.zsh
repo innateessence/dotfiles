@@ -1,16 +1,26 @@
 #!/usr/bin/env zsh
 
 # Pathing
-export PATH="$HOME/.local/bin:$PATH:/opt/local/bin:$HOME/.ghcup/bin:$HOME/.cargo/bin:$HOME/.gem/ruby/2.6.0/bin:$HOME/.luarocks/bin::$HOME/.local/share/lvim/mason/bin:/opt/homebrew/opt/e2fsprogs/sbin/"
+export FS_UTILS_PATH="/opt/homebrew/opt/e2fsprogs" # Give me CLI tools for interacting with linux filesystems on MacOS
+export LOCAL_PATH="$HOME/.local"                   # Misc local installs
 
-export GO_PATH="$HOME/go"
-export ERG_PATH="$HOME/.erg"
-export CC="gcc"
-export CXX="g++"
+export LUA_PATH="$HOME/.luarocks"
+export RUBY_PATH="$HOME/.gem/ruby/2.6.0"
+export HASKELL_PATH="$HOME/.ghcup"                 # GHC -> Haskell compiler / build tooling
+export CARGO_PATH="$HOME/.cargo"                   # Rust
+export ERG_PATH="$HOME/.erg"                       # Erg-lang. compiles to python bytecode.
+
+export MASON_PATH="$HOME/.local/share/lvim/mason"  # Mason. My Lunarvim 'package manager' for custom LSP integrations.
+
+export PATH="$PATH:$LOCAL_PATH/bin:$LUA_PATH/bin:$RUBY_PATH/bin:$MASON_PATH/bin:$HASKELL_PATH/bin:$CARGO_PATH/bin:$GO_PATH/bin:$ERG_PATH/bin:$FS_UTILS_PATH/sbin"
 
 # Misc Pathing
 export DOTFILES_DIR="$HOME/.dotfiles"
 export WORK_DIR="$HOME/roadz"
+
+# Compiler Options
+export CC="gcc"
+export CXX="g++"
 
 # Default Directory
 export DEFAULT_DIR="$HOME"
