@@ -49,6 +49,9 @@ VAULTS_DIR="/Users/jack/vaults"
 # Auto update manpage indexes
 @daily /opt/homebrew/bin/mandb &> /dev/null || $NOTIFY "CronJob" "Failed to update manpage"
 
+# every 5 minutes
+*/5 * * * * bash /Users/jack/.dotfiles/scripts/notify_if_server_down.sh "172.245.210.180" "Dryvebox"
+
 # Reminders
 # 30 9 * * * /usr/bin/env bash /Users/jack/.dotfiles/scripts/ls-prs.sh
 00 21 * * * $NOTIFY "Jesus Loves You" "Did you pray today?"
