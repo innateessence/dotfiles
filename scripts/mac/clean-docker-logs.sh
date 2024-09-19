@@ -14,9 +14,9 @@ function wipe_log(){
     # example usage:
     #   wipe_log "$LOG_PATH/monitor.log.0" true
     local log_file="$1"
-    local verbose="{2:-false}"
-    if [ "$verbose" = true ]; then
+    if [ "$VERBOSE" = true ]; then
         echo "Wiping log file: $log_file"
+        du -sh "$log_file"
     fi
 
     truncate -s 0 "$log_file"
@@ -24,7 +24,7 @@ function wipe_log(){
 
 function Main(){
     for log_file in "$LOG_PATH"/* ; do
-        wipe_log "$log_file" "$VERBOSE"
+        wipe_log "$log_file"
     done
 
     du -sh "$LOG_PATH"
