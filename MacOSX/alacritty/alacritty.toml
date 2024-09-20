@@ -1,0 +1,15 @@
+[window]
+startup_mode = "FullScreen"
+title = "Terminal"
+padding = { x = 5, y = 5 }
+
+[scrolling]
+history = 100000
+multiplier = 3
+
+[font]
+normal = { family = "Hack Nerd Font", style = "Regular" }
+bold = { family = "Hack Nerd Font", style = "Bold" }
+italic = { family = "Hack Nerd Font", style = "Italic" }
+bold_italic = { family = "Hack Nerd Font", style = "Bold Italic" }
+size = 18
