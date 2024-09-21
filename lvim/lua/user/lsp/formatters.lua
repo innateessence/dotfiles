@@ -37,6 +37,10 @@ formatters.setup {
     filetypes = { "asm" },
   },
   {
+    command = "taplo",
+    filetypes = { "toml" },
+  },
+  {
     command = "clang-format",
     filetypes = { "c", "cpp" },
     extra_args = { "--style", "{IndentWidth: 4}" }
