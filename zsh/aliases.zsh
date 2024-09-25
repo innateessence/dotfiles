@@ -120,6 +120,9 @@ if __is_mac; then
     alias archlinux.wake="~/.dotfiles/scripts/mac/wake-arch.sh"
     alias archlinux.ssh="ssh archlinux"
     alias archlinux.vnc="echo 'Opening VNC GUI...' && /Applications/kkRemote.app/Contents/MacOS/kkRemote"
+    alias archlinux.shutdown="archlinux.wake && archlinux.ssh 'sudo shutdown now'"
+    alias archlinux.suspend="archlinux.ssh 'sudo systemctl suspend'"
+    alias archlinux.sleep="archlinux.suspend"
 fi
 
 # WSL specific aliases

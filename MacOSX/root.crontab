@@ -34,7 +34,7 @@ NOTIFY="/bin/bash /Users/jack/.dotfiles/scripts/mac/notify.sh"
 # @daily /opt/homebrew/bin/hblock 
 
 # Auto download OS updates
-@daily /usr/sbin/softwareupdate --background -a -d > /dev/null 2>&1 
+@weekly /usr/sbin/softwareupdate --background -a -d > /dev/null 2>&1 
 
 # Auto dump cron env for debugging
 @hourly /bin/mkdir -p /tmp/cron-env && /usr/bin/env > /tmp/cron-env/root
