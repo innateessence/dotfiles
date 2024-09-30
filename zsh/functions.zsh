@@ -197,7 +197,7 @@ function ve(){
     local VIRTUAL_ENVS_DIR="$HOME/.virtualenvs"
     local TARGET_VIRTUALENV
     if test $VIRTUAL_ENV; then
-        TARGET_VIRTUALENV=$(basename $VIRTUAL_ENV)
+        TARGET_VIRTUALENV=$(/usr/bin/basename $VIRTUAL_ENV)
     else
         TARGET_VIRTUALENV=$DEFAULT_VIRTUALENV
     fi

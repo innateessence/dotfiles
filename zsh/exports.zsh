@@ -71,7 +71,7 @@ export PIPENV_IGNORE_VIRTUALENVS=1  # Force pipenv to create it's own virtualenv
 # WSL specific exports
 if __is_wsl; then
     export DISPLAY="$(\ip route | awk '/^default/{print $3; exit}'):0"  # \ip to ignore the `ip` alias
-    export BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+    # export BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe" # TODO: Switch to Firefox if we ever use WSL again.
 fi
 
 # Unset exports if the expected dependency doesn't exist in path

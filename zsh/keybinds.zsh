@@ -15,7 +15,7 @@ if __is_in_tmux; then
     bindkey -M vicmd '^[[4~' vi-end-of-line              # End              [N]
 
     if __is_mac; then
-        # NOTE: These are kitty terminal keybinds while using tmux. YMMV with different terminal emulators.
+        # NOTE: These are kitty terminal keybinds while using tmux. YMMV with different terminal emulators / keyboards.
         # I really shouldn't use tmux + kitty at the same time, but oh well,
         # I can make it work better than how most people have things setup.
 

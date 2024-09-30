@@ -57,7 +57,7 @@ if [ -d ~/.dotfiles/zsh ]; then
     source ~/.dotfiles/zsh/functions.zsh
     # source ~/.dotfiles/zsh/toomah-functions.zsh
     source ~/.dotfiles/zsh/wrapper-functions.zsh
-    source ~/.dotfiles/zsh/private_functions.zsh  # re-source this so private_functions can access aliases and functions circular-ly.
+    source ~/.dotfiles/zsh/private_functions.zsh  # re-source this so private_functions can access aliases, exports and functions circular-ly.
     source ~/.dotfiles/zsh/setopts.zsh
     source ~/.dotfiles/zsh/completions.zsh
     source ~/.dotfiles/zsh/zstyle.zsh
@@ -73,6 +73,11 @@ if [ -d ~/.dotfiles/zsh ]; then
         mail -e && info "You have mail!"
     fi
     mkquickcd
+
+
+    # NOTE: The order of when this is evaluated is very important!!!
+    typeset -U PATH path # Remove any duplicates in $PATH. Keep $PATH explicit for cross system compatibility reasons.
+
     if __is_in_tmux; then
         ve --activate
     fi
@@ -81,7 +86,3 @@ if [ -d ~/.dotfiles/zsh ]; then
     # (bash $DOTFILES_DIR/scripts/check-connection.sh &)
     # (bash $DOTFILES_DIR/scripts/ls-prs.sh &)
 fi
-
-
-# NOTE: This MUST be evaluated last to avoid some strange edge cases sometimes
-typeset -U PATH path # Remove any duplicates in $PATH. Keep $PATH explicit for cross system compatibility reasons.

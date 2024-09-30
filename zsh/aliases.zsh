@@ -123,6 +123,7 @@ if __is_mac; then
     alias archlinux.shutdown="archlinux.wake && archlinux.ssh 'sudo shutdown now'"
     alias archlinux.suspend="archlinux.ssh 'sudo systemctl suspend'"
     alias archlinux.sleep="archlinux.suspend"
+    alias archlinux.reboot="archlinux.wake && archlinux.ssh 'sudo reboot now'"
 fi
 
 # WSL specific aliases
