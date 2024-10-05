@@ -25,6 +25,16 @@ function outdated_pkgs(){ info "Outdated Packages:" $(__outdated_pkgs) ; }
 # Functions #
 # --------- #
 
+
+function ip.local(){
+  # NOTE: Theoretically works everywhere MacOS and GNU/Linux
+  if command_exists ifconfig; then
+    ifconfig | grep 'inet' | grep -v 'inet6' | grep -v '127.0.0.1' | awk '{print $2}' | head -n 1 | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
+  else
+    ip route get 1 | head -n 1 | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | tail -n 1
+  fi
+}
+
 function contains() {
     string="$1"
     substring="$2"
