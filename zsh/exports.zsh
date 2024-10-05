@@ -74,6 +74,10 @@ if __is_wsl; then
     # export BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe" # TODO: Switch to Firefox if we ever use WSL again.
 fi
 
+if __is_mac; then
+  export LOCAL_IP=$(ifconfig | grep 'inet' | grep -v 'inet6' | grep -v '127.0.0.1' | awk '{print $2}' | head -n 1 | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
+fi
+
 # Unset exports if the expected dependency doesn't exist in path
 if ! command -v bat &> /dev/null; then unset MANPAGER                 ; fi
 if ! command -v bat &> /dev/null; then unset FZF_DEFAULT_PREVIEW_CMD  ; fi
