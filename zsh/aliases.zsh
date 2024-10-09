@@ -117,7 +117,7 @@ if __is_mac; then
     alias cdtofinder="__cd_to_finder"
     alias hexedit="/Applications/ImHex.app/Contents/MacOS/imhex"
     alias x86_64="arch -x86_64 zsh"
-    alias archlinux.wake="~/.dotfiles/scripts/mac/wake-arch.sh"
+    alias archlinux.wake="~/.dotfiles/scripts/wake-arch.sh"
     alias archlinux.ssh="ssh archlinux"
     alias archlinux.vnc="echo 'Opening VNC GUI...' && /Applications/kkRemote.app/Contents/MacOS/kkRemote"
     alias archlinux.shutdown="archlinux.wake && archlinux.ssh 'sudo shutdown now'"
