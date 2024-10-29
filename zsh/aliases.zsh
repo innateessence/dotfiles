@@ -39,7 +39,7 @@ alias lspr="gh pr list --search 'review:required review-requested:@me'"
 alias icat="kitty +kitten icat"
 
 # ls aliases
-alias ls='lsd'
+alias ls='lsd --header --group-dirs first'
 alias ll="ls -lh"
 alias la="ls -lah"
 alias sl='ls'
@@ -119,11 +119,12 @@ if __is_mac; then
     alias x86_64="arch -x86_64 zsh"
     alias archlinux.wake="~/.dotfiles/scripts/wake-arch.sh"
     alias archlinux.ssh="ssh archlinux"
-    alias archlinux.vnc="echo 'Opening VNC GUI...' && /Applications/kkRemote.app/Contents/MacOS/kkRemote"
-    alias archlinux.shutdown="archlinux.wake && archlinux.ssh 'sudo shutdown now'"
+    alias archlinux.vnc="echo 'Opening VNC GUI...' && /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer"
+    alias archlinux.shutdown="archlinux.wake &> /dev/null && archlinux.ssh 'sudo shutdown now'"
     alias archlinux.suspend="archlinux.ssh 'sudo systemctl suspend'"
     alias archlinux.sleep="archlinux.suspend"
-    alias archlinux.reboot="archlinux.wake && archlinux.ssh 'sudo reboot now'"
+    alias archlinux.reboot="archlinux.wake &> /dev/null && archlinux.ssh 'sudo reboot now'"
+    alias archlinux.off="archlinux.wake &> /dev/null && archlinux.ssh 'sudo shutdown now'"
 fi
 
 # WSL specific aliases
