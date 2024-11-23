@@ -117,14 +117,21 @@ if __is_mac; then
     alias cdtofinder="__cd_to_finder"
     alias hexedit="/Applications/ImHex.app/Contents/MacOS/imhex"
     alias x86_64="arch -x86_64 zsh"
+
     alias archlinux.wake="~/.dotfiles/scripts/wake-arch.sh"
-    alias archlinux.ssh="ssh archlinux"
-    alias archlinux.vnc="echo 'Opening VNC GUI...' && /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer"
+    alias archlinux.on="archlinux.wake"
+
     alias archlinux.shutdown="archlinux.wake &> /dev/null && archlinux.ssh 'sudo shutdown now'"
+    alias archlinux.off="archlinux.shutdown"
+
     alias archlinux.suspend="archlinux.ssh 'sudo systemctl suspend'"
     alias archlinux.sleep="archlinux.suspend"
     alias archlinux.reboot="archlinux.wake &> /dev/null && archlinux.ssh 'sudo reboot now'"
-    alias archlinux.off="archlinux.wake &> /dev/null && archlinux.ssh 'sudo shutdown now'"
+
+    alias archlinux.ssh="ssh archlinux"
+    alias archlinux.vnc="echo 'Opening VNC GUI...' && /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer"
+
+    alias fix-remote="ssh dakboard '~/fix-remote.sh'"
 fi
 
 # WSL specific aliases
