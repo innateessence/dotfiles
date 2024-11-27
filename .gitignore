@@ -1,4 +1,5 @@
 .DS_STORE
 lvim/lazy-lock.json
-zsh/work-functions.zsh
+zsh/work.sh
 *.driveupload
+.python-version

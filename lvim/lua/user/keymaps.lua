@@ -17,10 +17,10 @@ lvim.keys.normal_mode["H"] = "<cmd>BufferLineCyclePrev<CR>"
 ------------------------
 
 -- Removed mappings
-lvim.builtin.which_key.mappings['w'] = {}
-lvim.builtin.which_key.mappings['q'] = {}
-lvim.builtin.which_key.mappings['h'] = {}
-lvim.builtin.which_key.mappings['/'] = {}
+-- lvim.builtin.which_key.mappings['w'] = {}
+-- lvim.builtin.which_key.mappings['q'] = {}
+-- lvim.builtin.which_key.mappings['h'] = {}
+-- lvim.builtin.which_key.mappings['/'] = {}
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }

@@ -48,22 +48,30 @@ lvim.plugins = {
   },
 
   {
-    -- Preview LSP GoTo
     "rmagatti/goto-preview",
     config = function()
       require('goto-preview').setup {
-        width = 120,              -- Width of the floating window
-        height = 25,              -- Height of the floating window
-        default_mappings = false, -- Bind default mappings
-        debug = false,            -- Print debug information
-        opacity = nil,            -- 0-100 opacity level of the floating window where 100 is fully transparent.
-        post_open_hook = nil      -- A function taking two arguments, a buffer and a window to be ran as a hook.
-        -- You can use "default_mappings = true" setup option
-        -- Or explicitly set keybindings
-        -- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
-        -- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
-        -- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
-      }
+        width = 120, -- Width of the floating window
+        height = 15, -- Height of the floating window
+        border = {"↖", "─" ,"┐", "│", "┘", "─", "└", "│"}, -- Border characters of the floating window
+        default_mappings = true, -- Bind default mappings
+        debug = false, -- Print debug information
+        opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
+        resizing_mappings = false, -- Binds arrow keys to resizing the floating window.
+        post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
+        post_close_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
+        references = { -- Configure the telescope UI for slowing the references cycling window.
+          telescope = require("telescope.themes").get_dropdown({ hide_preview = false })
+        },
+        -- These two configs can also be passed down to the goto-preview definition and implementation calls for one off "peak" functionality.
+        focus_on_open = true, -- Focus the floating window when opening it.
+        dismiss_on_move = false, -- Dismiss the floating window when moving the cursor.
+        force_close = true, -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
+        bufhidden = "wipe", -- the bufhidden option to set on the floating window. See :h bufhidden
+        stack_floating_preview_windows = true, -- Whether to nest floating windows
+        preview_window_title = { enable = true, position = "left" }, -- Whether to set the preview window title as the filename
+        zindex = 1 -- Starting zindex for the stack of floating windows
+    }
     end
   },
   -- Rainbow-ify my parans (and brackets, ect..)
@@ -80,38 +88,38 @@ lvim.plugins = {
   },
 
   -- Smooth scrolling :)
-  {
-    "karb94/neoscroll.nvim",
-    event = "WinScrolled",
-    config = function()
-      local mappings = {}
-      local slow = '450'
-      local medium = '150'
-      local fast = '50'
-      mappings['<PageUp>'] = { 'scroll', { '-vim.wo.scroll', 'true', fast, [['sine']] } }
-      mappings['<PageDown>'] = { 'scroll', { 'vim.wo.scroll', 'true', fast, [['sine']] } }
-      mappings['<C-PageUp>'] = { 'scroll', { '-vim.wo.scroll', 'true', medium, [['sine']] } }
-      mappings['<C-PageDown>'] = { 'scroll', { 'vim.wo.scroll', 'true', medium, [['sine']] } }
-      mappings['<C-Up>'] = { 'scroll', { '-vim.wo.scroll', 'true', slow, [['sine']] } }
-      mappings['<C-Down>'] = { 'scroll', { 'vim.wo.scroll', 'true', slow, [['sine']] } }
+  -- {
+  --   "karb94/neoscroll.nvim",
+  --   event = "WinScrolled",
+  --   config = function()
+  --     local mappings = {}
+  --     local slow = '450'
+  --     local medium = '150'
+  --     local fast = '50'
+  --     mappings['<PageUp>'] = { 'scroll', { '-vim.wo.scroll', 'true', fast, [['sine']] } }
+  --     mappings['<PageDown>'] = { 'scroll', { 'vim.wo.scroll', 'true', fast, [['sine']] } }
+  --     mappings['<C-PageUp>'] = { 'scroll', { '-vim.wo.scroll', 'true', medium, [['sine']] } }
+  --     mappings['<C-PageDown>'] = { 'scroll', { 'vim.wo.scroll', 'true', medium, [['sine']] } }
+  --     mappings['<C-Up>'] = { 'scroll', { '-vim.wo.scroll', 'true', slow, [['sine']] } }
+  --     mappings['<C-Down>'] = { 'scroll', { 'vim.wo.scroll', 'true', slow, [['sine']] } }
 
-      require('neoscroll').setup({
-        -- All these keys will be mapped to their corresponding default scrolling animation
-        -- mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
-        --         '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-        mappings = {},               -- Disabled overriding default bindings. Macros are useful sometimes.
-        hide_cursor = true,          -- Hide cursor while scrolling
-        stop_eof = true,             -- Stop at <EOF> when scrolling downwards
-        use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-        respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-        cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-        easing_function = nil,       -- Default easing function
-        pre_hook = nil,              -- Function to run before the scrolling animation starts
-        post_hook = nil,             -- Function to run after the scrolling animation ends
-      })
-      require('neoscroll.config').set_mappings(mappings)
-    end
-  },
+  --     require('neoscroll').setup({
+  --       -- All these keys will be mapped to their corresponding default scrolling animation
+  --       -- mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
+  --       --         '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
+  --       mappings = {},               -- Disabled overriding default bindings. Macros are useful sometimes.
+  --       hide_cursor = true,          -- Hide cursor while scrolling
+  --       stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+  --       use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+  --       respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+  --       cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+  --       easing_function = nil,       -- Default easing function
+  --       pre_hook = nil,              -- Function to run before the scrolling animation starts
+  --       post_hook = nil,             -- Function to run after the scrolling animation ends
+  --     })
+  --     require('neoscroll.config').set_mappings(mappings)
+  --   end
+  -- },
 
   {
     "metakirby5/codi.vim",
@@ -137,5 +145,3 @@ lvim.plugins = {
     end,
   },
 }
-
-lvim.plugins = {}

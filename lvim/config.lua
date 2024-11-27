@@ -15,8 +15,8 @@ require("user.lsp.linters")
 require("user.keymaps")
 require("user.autocmds")
 require("user.commands")
-require("user.langs.rust") -- Just do it.
-require("user.langs.c")
+-- require("user.langs.rust") -- Just do it.
+-- require("user.langs.c")
 
 -- Copilot test drive.
 table.insert(lvim.plugins, {

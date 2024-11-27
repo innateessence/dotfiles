@@ -4,6 +4,7 @@
 export FS_UTILS_PATH="/opt/homebrew/opt/e2fsprogs" # Give me CLI tools for interacting with linux filesystems on MacOS
 export LOCAL_PATH="$HOME/.local"                   # Misc local installs
 
+export GO_PATH="$HOME/go"
 export LUA_PATH="$HOME/.luarocks"
 export RUBY_PATH="$HOME/.gem/ruby/2.6.0"
 export HASKELL_PATH="$HOME/.ghcup"                 # GHC -> Haskell compiler / build tooling
@@ -35,7 +36,9 @@ export JIRA_DEFAULT_PROJECT="MARKET"
 # Default Progs
 export EDITOR='lvim'
 export VISUAL='lvim'
-export MANPAGER="sh -c 'col -bx | bat -l man --theme=default -p'"  # Use `bat` as pager (which uses less, but better)
+ # NOTE: This is the MacOS version. Need to verify the new MANPAGER env var below plays nicely with MacOS.
+# export MANPAGER="sh -c 'col -bx | bat -l man --theme=default -p'"
+export MANPAGER="sh -c 'bat -l man --theme=default -p'"   # Use `bat` as pager (which uses less, but better)
 
 # History
 export HISTFILE="$HOME/.zsh_history"
@@ -59,7 +62,6 @@ export FZF_DEFAULT_PREVIEW_OPTS='--force-colorization --theme=TwoDark --line-ran
 export NETWORK_CHECK_SHELL_TIMEOUT=4  # Timeout value for functions that check various network access when run as a shell function
 
 # Github (gh, hub)
-export GIT_EXTERNAL_DIFF="/opt/homebrew/bin/difft"
 # export GITHUB_TOKEN="$(pass show personal/github/token/sudo)"
 
 # Pipenv

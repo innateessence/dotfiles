@@ -12,3 +12,4 @@
 
 ## Just looking for goodies?
 * Checkout the [zsh](zsh) directory
+

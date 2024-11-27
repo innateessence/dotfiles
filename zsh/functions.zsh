@@ -9,13 +9,11 @@ function error(){ echo >&2 `tput bold; tput setaf 1`"[-] ERROR: ${*}"`tput sgr0`
 function command_exists(){ command -v "$1" &> /dev/null; }
 function file_exists() { [[ -a "$1" ]] ; }
 function directory_exists() { [[ -d "$1" ]] ; }
-function work() { source $DOTFILES_DIR/zsh/work-functions.zsh ; }
 function get_dir() { echo $( dirname "$(realpath "$1")" ) ; } # A better version of `dirname`
 function beep_me(){ for i in {0..${1:-25}}; do printf "\a" && sleep 0.1 ; done ; }
 function pids_mem(){ ps -p $1 -o rss | grep -v "RSS" | numfmt --to=iec ; } # gets (real) resident memory usage of a process
 
 # One-liners (Misc)
-function lsports(){ netstat -Watnlv | grep LISTEN | awk '{"ps -ww -o args= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|" ; }
 # function lsportprogs(){ lsports | grep -o -E "name:.+" | sed 's/name: //g' | sort | uniq | sed 's/--.*//g' ; }
 function gen_pass(){ echo $(base64 < /dev/urandom | tr -d 'O0Il1+/' | head -c 64) | clip ; }
 # function has_connections(){ has_internet_access && has_git_access || return 1 ; }
@@ -26,13 +24,22 @@ function outdated_pkgs(){ info "Outdated Packages:" $(__outdated_pkgs) ; }
 # --------- #
 
 
+function lsports(){
+    # NOTE: TCP only
+    if __is_mac; then
+        __lsports_mac
+    else
+        __lsports_linux
+    fi
+}
+
 function ip.local(){
-  # NOTE: Theoretically works everywhere MacOS and GNU/Linux
-  if command_exists ifconfig; then
-    ifconfig | grep 'inet' | grep -v 'inet6' | grep -v '127.0.0.1' | awk '{print $2}' | head -n 1 | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
-  else
-    ip route get 1 | head -n 1 | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | tail -n 1
-  fi
+    # NOTE: Theoretically works everywhere MacOS and GNU/Linux
+    if command_exists ifconfig; then
+        ifconfig | grep 'inet' | grep -v 'inet6' | grep -v '127.0.0.1' | awk '{print $2}' | head -n 1 | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
+    else
+        ip route get 1 | head -n 1 | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | tail -n 1
+    fi
 }
 
 function contains() {

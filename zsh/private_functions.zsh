@@ -5,6 +5,7 @@
 # One liners
 function __is_mac(){ __is_equal $(uname -s) "Darwin" ; }
 function __is_arch_linux(){ command -pv pacman &> /dev/null ; }
+function __is_ubuntu(){ uname -v | grep -i -o 'Ubuntu' &> /dev/null }
 function __is_equal(){ test $1 = $2 ; }
 function __is_vpn_active(){ ifconfig -a | grep $VPN_TUNNEL_DEV &> /dev/null ; }
 function __is_in_tmux(){ test -n "$TMUX" ; }
@@ -26,6 +27,36 @@ function __is_wsl(){
     fi
     return 1
 }
+
+
+function __lsports_mac(){
+    # NOTE: TCP only
+    netstat -Watnlv | grep LISTEN | awk '{"ps -ww -o args= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|"
+}
+
+function __lsports_linux(){
+    # NOTE: TCP only
+    sudo netstat -Watnlvep | grep LISTEN | awk '{
+      pid = $9;
+      # Extract the numeric PID part from pid/command format (if it exists)
+      split(pid, pid_parts, "/");
+      pid_num = pid_parts[1];
+
+      if (pid_num > 0) {
+        cmd="ps -ww -o args= -p " pid_num;
+        cmd | getline procname;
+        close(cmd);
+        colred="\033[01;31m";
+        colclr="\033[0m";
+        print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr pid_num colred " | name: " colclr procname;
+      } else {
+        colred="\033[01;31m";
+        colclr="\033[0m";
+        print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr pid colred " | name: " colclr "N/A";
+      }
+    }' | column -t -s "|"
+}
+
 
 
 function __is_dir_empty(){

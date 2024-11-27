@@ -105,6 +105,10 @@ if __is_arch_linux; then
     alias ip="ip -color -brief"
 fi
 
+if __is_ubuntu; then
+  alias clip="xclip -i -selection clipboard"
+fi
+
 # MacOS specific aliases
 if __is_mac; then
     alias clip="no-eol | pbcopy |  echo '[+] copied to clipboard'"
@@ -117,14 +121,21 @@ if __is_mac; then
     alias cdtofinder="__cd_to_finder"
     alias hexedit="/Applications/ImHex.app/Contents/MacOS/imhex"
     alias x86_64="arch -x86_64 zsh"
+
     alias archlinux.wake="~/.dotfiles/scripts/wake-arch.sh"
-    alias archlinux.ssh="ssh archlinux"
-    alias archlinux.vnc="echo 'Opening VNC GUI...' && /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer"
+    alias archlinux.on="archlinux.wake"
+
     alias archlinux.shutdown="archlinux.wake &> /dev/null && archlinux.ssh 'sudo shutdown now'"
+    alias archlinux.off="archlinux.shutdown"
+
     alias archlinux.suspend="archlinux.ssh 'sudo systemctl suspend'"
     alias archlinux.sleep="archlinux.suspend"
     alias archlinux.reboot="archlinux.wake &> /dev/null && archlinux.ssh 'sudo reboot now'"
-    alias archlinux.off="archlinux.wake &> /dev/null && archlinux.ssh 'sudo shutdown now'"
+
+    alias archlinux.ssh="ssh archlinux"
+    alias archlinux.vnc="echo 'Opening VNC GUI...' && /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer"
+
+    alias fix-remote="ssh dakboard '~/fix-remote.sh'"
 fi
 
 # WSL specific aliases
@@ -132,21 +143,25 @@ if __is_wsl; then
     alias clip="clip.exe"
 fi
 
+if __is_ubuntu; then
+  alias upgrade="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y"
+fi
+
 # Unset aliases if the expected dependency doesn't exist in path
-if ! command -v bpython   &> /dev/null;  then unalias bpy          ; fi
-if ! command -v bpython   &> /dev/null;  then unalias bpy          ; fi
-if ! command -v ptpython  &> /dev/null;  then unalias ppy          ; fi
-if ! command -v hs        &> /dev/null;  then unalias http-status  ; fi
-if ! command -v lsd       &> /dev/null;  then unalias ls           ; fi
-if ! command -v bat       &> /dev/null;  then unalias cat          ; fi
-if ! command -v glow      &> /dev/null;  then unalias markdown     ; fi
-if ! command -v hub       &> /dev/null;  then unalias git          ; fi
-if ! command -v gh        &> /dev/null;  then unalias lspr         ; fi
-if ! command -v gh        &> /dev/null;  then unalias propen       ; fi
-if ! command -v kitty     &> /dev/null;  then unalias icat         ; fi
-if ! command -v ip        &> /dev/null;  then unalias ip           ; fi
-if ! command -v wget      &> /dev/null;  then unalias wget         ; fi
-if ! command -v ncdu      &> /dev/null;  then unalias du-gui       ; fi
-if ! command -v fzf       &> /dev/null;  then unalias f            ; fi
-if ! command -v fzf       &> /dev/null;  then unalias zf           ; fi
-if ! command -v luap      &> /dev/null;  then unalias luash        ; fi
+if ! command -v bpython  &> /dev/null && command -v bpy          &> /dev/null;  then unalias bpy         ; fi
+if ! command -v bpython  &> /dev/null && command -v bpy          &> /dev/null;  then unalias bpy         ; fi
+if ! command -v ptpython &> /dev/null && command -v ppy          &> /dev/null;  then unalias ppy         ; fi
+if ! command -v hs       &> /dev/null && command -v http-status  &> /dev/null;  then unalias http-status ; fi
+if ! command -v lsd      &> /dev/null && command -v ls           &> /dev/null;  then unalias ls          ; fi
+if ! command -v bat      &> /dev/null && command -v cat          &> /dev/null;  then unalias cat         ; fi
+if ! command -v glow     &> /dev/null && command -v markdown     &> /dev/null;  then unalias markdown    ; fi
+if ! command -v hub      &> /dev/null && command -v git          &> /dev/null;  then unalias git         ; fi
+if ! command -v gh       &> /dev/null && command -v lspr         &> /dev/null;  then unalias lspr        ; fi
+if ! command -v gh       &> /dev/null && command -v propen       &> /dev/null;  then unalias propen      ; fi
+if ! command -v kitty    &> /dev/null && command -v icat         &> /dev/null;  then unalias icat        ; fi
+if ! command -v ip       &> /dev/null && command -v ip           &> /dev/null;  then unalias ip          ; fi
+if ! command -v wget     &> /dev/null && command -v wget         &> /dev/null;  then unalias wget        ; fi
+if ! command -v ncdu     &> /dev/null && command -v du-gui       &> /dev/null;  then unalias du-gui      ; fi
+if ! command -v fzf      &> /dev/null && command -v f            &> /dev/null;  then unalias f           ; fi
+if ! command -v fzf      &> /dev/null && command -v zf           &> /dev/null;  then unalias zf          ; fi
+if ! command -v luap     &> /dev/null && command -v luash        &> /dev/null;  then unalias luash       ; fi

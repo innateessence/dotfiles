@@ -15,19 +15,18 @@ if __is_in_tmux; then
     bindkey -M vicmd '^[[4~' vi-end-of-line              # End              [N]
 
     if __is_mac; then
-        # NOTE: These are kitty terminal keybinds while using tmux. YMMV with different terminal emulators / keyboards.
-        # I really shouldn't use tmux + kitty at the same time, but oh well,
-        # I can make it work better than how most people have things setup.
+        # NOTE: These are alacritty terminal keybinds while using tmux. YMMV with different terminal emulators / keyboards.
+        # NOTE: tmux considers option and command keys as the same in combination with arrow keys.
+        bindkey -M viins "\e[1;3C" forward-word          # Cmd + Right     [I]
+        bindkey -M viins "\e[1;3D" backward-word         # Cmd + Left      [I]
+        bindkey -M vicmd "\e[1;3C" vi-forward-word       # Cmd + Right     [N]
+        bindkey -M vicmd "\e[1;3D" vi-backward-word      # Cmd + Left      [N]
 
-        # Jump backwards/forwards by a word.
-        bindkey -M viins "\e[1;2C" forward-word          # Ctrl + Right     [I]
-        bindkey -M viins "\e[1;2D" backward-word         # Ctrl + Left      [I]
-        bindkey -M vicmd "\e[1;2C" vi-forward-word       # Ctrl + Right     [N]
-        bindkey -M vicmd "\e[1;2D" vi-backward-word      # Ctrl + Left      [N]
-        bindkey -M viins "\e[1;3C" forward-word          # Ctrl + Right     [I]
-        bindkey -M viins "\e[1;3D" backward-word         # Ctrl + Left      [I]
-        bindkey -M vicmd "\e[1;3C" vi-forward-word       # Ctrl + Right     [N]
-        bindkey -M vicmd "\e[1;3D" vi-backward-word      # Ctrl + Left      [N]
+        bindkey -M viins "\e[1;5C" forward-word          # Ctrl + Right     [I]
+        bindkey -M viins "\e[1;5D" backward-word         # Ctrl + Left      [I]
+        bindkey -M vicmd "\e[1;5C" vi-forward-word       # Ctrl + Right     [N]
+        bindkey -M vicmd "\e[1;5D" vi-backward-word      # Ctrl + Left      [N]
+        # Jump to start/end of line
     elif __is_wsl; then
         # NOTE: These are my Windows ArchWSL keybinds using the Windows Terminal
 
@@ -36,7 +35,21 @@ if __is_in_tmux; then
         bindkey -M viins "\e[1;5D" backward-word         # Ctrl + Left      [I]
         bindkey -M vicmd "\e[1;5C" vi-forward-word       # Ctrl + Right     [N]
         bindkey -M vicmd "\e[1;5D" vi-backward-word      # Ctrl + Left      [N]
+
+    elif __is_ubuntu; then
+        # NOTE: WORK LAPTOP
+        bindkey -M viins "\e[1;5C" forward-word          # Ctrl + Right     [I]
+        bindkey -M viins "\e[1;5D" backward-word         # Ctrl + Left      [I]
+        bindkey -M vicmd "\e[1;5C" vi-forward-word       # Ctrl + Right     [N]
+        bindkey -M vicmd "\e[1;5D" vi-backward-word      # Ctrl + Left      [N]
+
+        bindkey -M viins "\e[1;3C" forward-word          # Alt + Right     [I]
+        bindkey -M viins "\e[1;3D" backward-word         # Alt + Left      [I]
+        bindkey -M vicmd "\e[1;3C" vi-forward-word       # Alt + Right     [N]
+        bindkey -M vicmd "\e[1;3D" vi-backward-word      # Alt + Left      [N]
+
     fi
+
 
     # Delete line after cursor position
     bindkey -M viins "^K" vi-kill-eol                    # Ctrl + K         [I]
