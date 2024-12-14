@@ -16,6 +16,10 @@ linters.setup {
   --   extra_args = { '--ignore',
   --     "E121,E122,E123,E124,E125,E126,E127,E128,E129,E131,E265,E266,E402,E501,E722,E731,E741,W503,W504" },
   -- },
+  -- {
+  --   command = "mypy",
+  --   filetypes = { "python" },
+  -- },
   {
     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
     command = "shellcheck",
@@ -31,11 +35,11 @@ linters.setup {
     command = "yamllint",
     filetypes = { "yaml", "yml" },
   },
-  {
-    command = "markdownlint",
-    extra_args = { "--disable", "MD033", "--disable", "MD041" },
-    filetypes = { "html", "markdown" },
-  },
+  -- {
+  --   command = "markdownlint",
+  --   extra_args = { "--disable", "MD033", "--disable", "MD041" },
+  --   filetypes = { "html", "markdown" },
+  -- },
   -- {
   --   command = "markuplint",
   --   filetypes = { "html" },

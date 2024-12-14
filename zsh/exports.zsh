@@ -20,8 +20,8 @@ export DOTFILES_DIR="$HOME/.dotfiles"
 export WORK_DIR="$HOME/roadz"
 
 # Compiler Options
-export CC="gcc"
-export CXX="g++"
+# export CC="gcc"
+# export CXX="g++"
 
 # Default Directory
 export DEFAULT_DIR="$HOME"
@@ -65,7 +65,7 @@ export NETWORK_CHECK_SHELL_TIMEOUT=4  # Timeout value for functions that check v
 # export GITHUB_TOKEN="$(pass show personal/github/token/sudo)"
 
 # Pipenv
-export PIPENV_IGNORE_VIRTUALENVS=1  # Force pipenv to create it's own virtualenv instead of using the currently active virtualenv
+# export PIPENV_IGNORE_VIRTUALENVS=1  # Force pipenv to create it's own virtualenv instead of using the currently active virtualenv
 
 # Aider
 # export OPENAI_API_KEY="$(pass show chatgpt/aider)"

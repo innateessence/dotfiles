@@ -166,8 +166,15 @@ function __write_to_current_stdin(){
 function __pidsof(){
     # Custom function for searching running processes and yielding the PID of the results
     local name="$1"
-    local PIDS=($(ps -e | grep "$1" | grep -v grep | awk '{print $1}' | tr '\n' ' '))
-    for pid in $PIDS; do
+    local pids
+
+    if __is_mac; then
+      pids=($(ps -e | grep "$1" | grep -v grep | awk '{print $1}' | tr '\n' ' '))
+    else
+      pids=($(ps a | grep "$1" | grep -v grep | awk '{print $1}' | tr '\n' ' '))
+    fi
+
+    for pid in $pids; do
         echo $pid
     done
 }

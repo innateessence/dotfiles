@@ -5,10 +5,20 @@
 # And some that just wrap on top of an existing binary
 
 function vf(){
+  # vim fuzzy file
   local filename
   filename=$(fzff)
   if [ -n "$filename" ]; then
     lvim $filename
+  fi
+}
+
+function cd(){
+  # fuzzy find change directory
+  if [ $# -eq 0 ]; then
+    builtin cd "$(find -type d | fzf)"
+  else
+    builtin cd "$@"
   fi
 }
 

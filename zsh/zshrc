@@ -56,15 +56,17 @@ function __source_ubuntu_pre(){
 function __source_ubuntu_post(){
     export LUA_PATH="/usr/local/share/lua/5.1/?.lua;/usr/share/lua/5.1/?.lua;;"
     export LUA_CPATH="/usr/local/lib/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;;"
-    export PYENV_ROOT="$HOME/.pyenv"
-    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-    PATH="/home/brenden/perl5/bin:${PATH}"; export PATH;
+    export PATH="/home/brenden/perl5/bin:${PATH}";
     PERL5LIB="/home/brenden/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
     PERL_LOCAL_LIB_ROOT="/home/brenden/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
     PERL_MB_OPT="--install_base \"/home/brenden/perl5\""; export PERL_MB_OPT;
     PERL_MM_OPT="INSTALL_BASE=/home/brenden/perl5"; export PERL_MM_OPT;
     export GIT_EXTERNAL_DIFF="$HOME/.cargo/bin/difft"
+    export PYENV_ROOT="$HOME/.pyenv"
+    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+    bash $HOME/disable-touchscreen.sh
 }
 
 if test -f ~/.fzf.zsh; then
@@ -113,10 +115,9 @@ if [ -d ~/.dotfiles/zsh ]; then
     fi
 
     # NOTE: The order of when this is evaluated is very important!!!
-    typeset -U PATH path # Remove any duplicates in $PATH. Keep $PATH explicit for cross system compatibility reasons.
+    # typeset -U PATH path # Remove any duplicates in $PATH. Keep $PATH explicit for cross system compatibility reasons.
 
     if __is_in_tmux; then
-        ve --activate
         source ~/.dotfiles/zsh/aliases.zsh
         source ~/.dotfiles/zsh/wrapper-functions.zsh
     fi
@@ -127,5 +128,7 @@ if [ -d ~/.dotfiles/zsh ]; then
     #
     if test -f $HOME/.dotfiles/zsh/work.sh; then
         source $HOME/.dotfiles/zsh/work.sh
+    else
+        ve --activate
     fi
 fi

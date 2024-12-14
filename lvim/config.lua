@@ -44,3 +44,51 @@ if vim.fn.has('wsl') == 1 then
     end,
   })
 end
+
+
+-- add `pyright` to `skipped_servers` list
+-- remove `jedi_language_server` from `skipped_servers` list
+-- lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
+--   return server ~= "ruff_lsp"
+-- end, lvim.lsp.automatic_configuration.skipped_servers)
+
+vim.g.python3_host_prog = '/home/brenden/.pyenv/versions/3.10.13/bin/python3'
+
+-- local pyright_opts = {
+--   single_file_support = true,
+--   settings = {
+--     pyright = {
+--       disableLanguageServices = true,
+--       disableOrganizeImports = false
+--     },
+--     python = {
+--       analysis = {
+--         autoImportCompletions = true,
+--         autoSearchPaths = true,
+--         diagnosticMode = "workspace", -- openFilesOnly, workspace
+--         typeCheckingMode = "basic", -- off, basic, strict
+--         useLibraryCodeForTypes = true
+--       }
+--     }
+--   },
+-- }
+
+-- require("lvim.lsp.manager").setup("pyright", pyright_opts)
+
+-- -- Example LunarVim config for pyright LSP
+-- local lspconfig = require('lspconfig')
+
+-- lspconfig.pyright.setup{
+--   settings = {
+--     pyright = {
+--       disableLanguageServices = true,
+--     },
+--     python = {
+--       analysis = {
+--         autoSearchPaths = true,
+--         useLibraryCodeForTypes = true,
+--       },
+--     },
+--   },
+-- }
+
