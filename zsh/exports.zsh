@@ -38,7 +38,12 @@ export EDITOR='lvim'
 export VISUAL='lvim'
  # NOTE: This is the MacOS version. Need to verify the new MANPAGER env var below plays nicely with MacOS.
 # export MANPAGER="sh -c 'col -bx | bat -l man --theme=default -p'"
-export MANPAGER="sh -c 'bat -l man --theme=default -p'"   # Use `bat` as pager (which uses less, but better)
+if __is_mac; then
+    export MANPAGER="sh -c 'col -bx | bat -l man --theme=default -p'"
+else
+    export MANPAGER="sh -c 'bat -l man --theme=default -p'"   # Use `bat` as pager (which uses less, but better)
+fi
+
 
 # History
 export HISTFILE="$HOME/.zsh_history"
