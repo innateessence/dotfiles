@@ -31,7 +31,7 @@ function __is_wsl(){
 
 function __lsports_mac(){
     # NOTE: TCP only
-    netstat -Watnlv | grep LISTEN | awk '{"ps -ww -o args= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|"
+    netstat -Watnlv | grep LISTEN | awk '{"ps -ww -o args= -p " $11 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|"
 }
 
 function __lsports_linux(){

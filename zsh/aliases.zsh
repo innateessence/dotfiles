@@ -106,7 +106,7 @@ if __is_arch_linux; then
 fi
 
 if __is_ubuntu; then
-  alias clip="xclip -i -selection clipboard"
+    alias clip="xclip -i -selection clipboard"
 fi
 
 # MacOS specific aliases
@@ -130,7 +130,8 @@ if __is_mac; then
 
     alias archlinux.suspend="archlinux.ssh 'sudo systemctl suspend'"
     alias archlinux.sleep="archlinux.suspend"
-    alias archlinux.reboot="archlinux.wake &> /dev/null && archlinux.ssh 'sudo reboot now'"
+    # alias archlinux.reboot="archlinux.wake &> /dev/null && archlinux.ssh 'sudo reboot now'"
+    alias archlinux.reboot="archlinux.shutdown && sleep 60 && archlinux.on" # NOTE: Due to a glitch, `reboot` has errors. Should fix some day. Prob kernel mod related.
 
     alias archlinux.ssh="ssh archlinux"
     alias archlinux.vnc="echo 'Opening VNC GUI...' && /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer"
@@ -144,7 +145,7 @@ if __is_wsl; then
 fi
 
 if __is_ubuntu; then
-  alias upgrade="sudo apt update && sudo apt upgrade -y"
+    alias upgrade="sudo apt update && sudo apt upgrade -y"
 fi
 
 # Unset aliases if the expected dependency doesn't exist in path

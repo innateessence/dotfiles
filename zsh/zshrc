@@ -128,6 +128,8 @@ if [ -d ~/.dotfiles/zsh ]; then
     if test -f $HOME/.dotfiles/zsh/work.sh; then
         source $HOME/.dotfiles/zsh/work.sh
     else
-        ve --activate
+        if __is_in_tmux; then
+            ve --activate
+        fi
     fi
 fi

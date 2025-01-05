@@ -61,4 +61,4 @@ VAULTS_DIR="/Users/jack/vaults"
 00 10,16,21 * * * $NOTIFY "Reminder" "Did you eat?" # 10 AM, 4 PM, 9 PM
 
 # Sometimes Google drive freezes. Kill and restart it periodically so I never need to think about this.
-@daily /usr/bin/killall -9 'Google Drive' && /Applications/Google\ Drive.app/Contents/MacOS/Google\ Drive &> /dev/null
+# @daily /usr/bin/killall -9 'Google Drive' && /Applications/Google\ Drive.app/Contents/MacOS/Google\ Drive &> /dev/null
