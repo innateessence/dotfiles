@@ -2,10 +2,10 @@
 
 # One-liners (Generic)
 
-function msg(){ echo `tput bold; tput setaf 2`"[+] ${*}"`tput sgr0`; }
-function info(){ echo `tput bold; tput setaf 3`"[*] ${*}"`tput sgr0`; }
-function warn(){ echo >&2 `tput bold; tput setaf 1`"[!] WARN: ${*}"`tput sgr0`; }
-function error(){ echo >&2 `tput bold; tput setaf 1`"[-] ERROR: ${*}"`tput sgr0` ; exit 1; }
+function msg(){ echo "$(tput bold; tput setaf 2)[+] ${*}$(tput sgr0)"; }
+function info(){ echo "$(tput bold; tput setaf 3)[*] ${*}$(tput sgr0)"; }
+function warn(){ echo >&2 "$(tput bold; tput setaf 1)[!] WARN: ${*}$(tput sgr0)"; }
+function error(){ echo >&2 "$(tput bold; tput setaf 1)[-] ERROR: ${*}$(tput sgr0)" ; exit 1; }
 function command_exists(){ command -v "$1" &> /dev/null; }
 function file_exists() { [[ -a "$1" ]] ; }
 function directory_exists() { [[ -d "$1" ]] ; }
