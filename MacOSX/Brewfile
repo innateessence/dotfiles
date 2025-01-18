@@ -84,7 +84,7 @@ brew "ncdu"
 brew "neofetch"
 brew "nmap"
 brew "nvm"
-brew "ollama", restart_service: true
+brew "ollama", restart_service: :changed
 brew "openjdk"
 brew "openvpn"
 brew "optipng"
@@ -110,7 +110,7 @@ brew "rmlint"
 brew "rsync"
 brew "rustup"
 brew "slackcat"
-brew "sleepwatcher", restart_service: true
+brew "sleepwatcher", restart_service: :changed
 brew "sox"
 brew "speedtest-cli"
 brew "telnet"

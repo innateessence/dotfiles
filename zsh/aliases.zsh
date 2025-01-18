@@ -125,14 +125,12 @@ if __is_mac; then
     alias archlinux.wake="~/.dotfiles/scripts/wake-arch.sh"
     alias archlinux.on="archlinux.wake"
 
-    alias archlinux.shutdown="archlinux.wake &> /dev/null && archlinux.ssh 'sudo shutdown now'"
+    alias archlinux.shutdown="archlinux.ssh 'sudo shutdown now'"
     alias archlinux.off="archlinux.shutdown"
 
     alias archlinux.suspend="archlinux.ssh 'sudo systemctl suspend'"
     alias archlinux.sleep="archlinux.suspend"
-    # alias archlinux.reboot="archlinux.wake &> /dev/null && archlinux.ssh 'sudo reboot now'"
-    alias archlinux.reboot="archlinux.shutdown && sleep 60 && archlinux.on" # NOTE: Due to a glitch, `reboot` has errors. Should fix some day. Prob kernel mod related.
-
+    alias archlinux.reboot="archlinux.wake &> /dev/null ; archlinux.ssh 'sudo reboot now'"
     alias archlinux.ssh="ssh archlinux"
     alias archlinux.vnc="echo 'Opening VNC GUI...' && /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer"
 
