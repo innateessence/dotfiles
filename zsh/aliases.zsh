@@ -143,7 +143,7 @@ if __is_wsl; then
 fi
 
 if __is_ubuntu; then
-    alias upgrade="sudo apt update && sudo apt upgrade -y && apt autoremove -y"
+    alias upgrade="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 fi
 
 # Unset aliases if the expected dependency doesn't exist in path
