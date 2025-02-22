@@ -14,7 +14,7 @@ function beep_me(){ for i in {0..${1:-25}}; do printf "\a" && sleep 0.1 ; done ;
 function pids_mem(){ ps -p $1 -o rss | grep -v "RSS" | numfmt --to=iec ; } # gets (real) resident memory usage of a process
 
 # One-liners (Misc)
-# function lsportprogs(){ lsports | grep -o -E "name:.+" | sed 's/name: //g' | sort | uniq | sed 's/--.*//g' ; }
+function lsportprogs(){ lsports | grep -o -E "name:.+" | sed 's/name: //g' | sort | uniq | sed 's/--.*//g' ; }
 function gen_pass(){ echo $(base64 < /dev/urandom | tr -d 'O0Il1+/' | head -c 64) | clip ; }
 # function has_connections(){ has_internet_access && has_git_access || return 1 ; }
 function outdated_pkgs(){ info "Outdated Packages:" $(__outdated_pkgs) ; }

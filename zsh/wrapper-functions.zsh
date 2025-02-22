@@ -16,7 +16,7 @@ function vf(){
 function cd(){
   # fuzzy find change directory
   if [ $# -eq 0 ]; then
-    builtin cd "$(find -type d | fzf)"
+    builtin cd "$(find . -type d | fzf)"
   else
     builtin cd "$@"
   fi
