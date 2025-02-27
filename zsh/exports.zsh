@@ -30,17 +30,20 @@ export DEFAULT_DIR="$HOME"
 export DEFAULT_VIRTUALENV="default"
 
 # JIRA (Custom use only)
-export JIRA_URL="https://roadz-jira.atlassian.net"
-export JIRA_DEFAULT_PROJECT="MARKET"
+export JIRA_URL="REDACTED"
+export JIRA_DEFAULT_PROJECT="REDACTED"
 
 # Default Progs
 export EDITOR='lvim'
 export VISUAL='lvim'
- # NOTE: This is the MacOS version. Need to verify the new MANPAGER env var below plays nicely with MacOS.
-# export MANPAGER="sh -c 'col -bx | bat -l man --theme=default -p'"
+
 if __is_mac; then
     export MANPAGER="sh -c 'col -bx | bat -l man --theme=default -p'"
+elif __is_ubuntu; then
+    export GROFF_NO_SGR=1  # Disable ANSI SGR escape codes for `groff` (formatter used by `man`)
+    export MANPAGER="sh -c 'col -b | bat -l man --theme=default -p'"
 else
+    # NOTE: There may be more fine-tuning / configuring to be done here
     export MANPAGER="sh -c 'bat -l man --theme=default -p'"   # Use `bat` as pager (which uses less, but better)
 fi
 
