@@ -82,6 +82,7 @@ brew "mpv"
 brew "nasm"
 brew "ncdu"
 brew "neofetch"
+brew "neovim"
 brew "nmap"
 brew "nvm"
 brew "ollama", restart_service: :changed

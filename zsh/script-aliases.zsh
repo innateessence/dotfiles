@@ -35,7 +35,7 @@ function generate_script_aliases(){
     for script_dir in $SCRIPT_DIRS; do
         if [ -d "$script_dir" ]; then
             for ext in $EXTENSIONS; do
-                for script in $(ls $script_dir/**/*.$ext); do
+                for script in $script_dir/**/*.$ext; do
                     if __is_executable "$script"; then
                         local alias_name=$(basename $(trim_file_ext "$script"))
                         if __is_sudo_alias "$alias_name"; then

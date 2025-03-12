@@ -185,7 +185,7 @@ function notify(){
 
 function untar(){
     while [ ${#} != 0 ];
-    do if [ -f "${1}" ]; then
+        do if [ -f "${1}" ]; then
             case "${1}" in
                 *.tar);         tar xfv  "${1}";  shift ;;
                 *.tar.xz);      tar xfv  "${1}";  shift ;;

@@ -144,4 +144,5 @@ lvim.plugins = {
       require("todo-comments").setup()
     end,
   },
+
 }

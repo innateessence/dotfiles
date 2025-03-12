@@ -35,6 +35,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+
 -- vim.api.nvim_create_autocmd("BufWritePost", {
 --   group = "_general_settings",
 --   pattern = "lvim/**.lua",

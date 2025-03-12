@@ -63,7 +63,7 @@ function __set_all_indicators(){
     __set_arch_indicator
 }
 
-function zle-line-init zle-keymap-select {
+function zle-line-init {
     local __EXIT_CODE="%(?.%F{green}.%F{red})%?%f"                  # Colorize exit code. Fetch this before making any other calls
     __set_all_indicators                                            # Update global indicator variables
 

@@ -5,7 +5,7 @@
 # One liners
 function __is_mac(){ __is_equal $(uname -s) "Darwin" ; }
 function __is_arch_linux(){ command -pv pacman &> /dev/null ; }
-function __is_ubuntu(){ uname -v | grep -i -o 'Ubuntu' &> /dev/null }
+function __is_ubuntu(){ uname -v | grep -i -o 'Ubuntu' &> /dev/null ; }
 function __is_equal(){ test $1 = $2 ; }
 function __is_vpn_active(){ ifconfig -a | grep $VPN_TUNNEL_DEV &> /dev/null ; }
 function __is_in_tmux(){ test -n "$TMUX" ; }
@@ -75,7 +75,7 @@ function __is_dir_empty(){
 }
 
 function __browser_open(){
-    for url in $@; do
+    for url in "$@"; do
         if __is_wsl; then
             $BROWSER $url &> /dev/null
         else

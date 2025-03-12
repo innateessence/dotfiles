@@ -29,7 +29,7 @@ function fzff(){
     if [ $# -eq 0 ]; then
         command fzf --preview "$FZF_DEFAULT_PREVIEW_CMD $FZF_DEFAULT_PREVIEW_OPTS {}"
     else
-        command fzf $@
+        command fzf "$@"
     fi
 }
 

@@ -80,9 +80,9 @@ alias cdf="fzff_cd"
 alias xf="fzf_exec"
 
 # Editor aliases (LunarVim ftw)
-alias vi='lvim'
-alias vim='lvim'
-# alias nvim='lvim'
+alias vi='nvim'
+alias vim='nvim'
+alias nvim="lvim"
 alias lvim!="sudo -E lvim"
 alias vidiff='lvim -d'
 alias vimdiff='lvim -d'
