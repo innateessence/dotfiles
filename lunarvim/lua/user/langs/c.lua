@@ -1,4 +1,3 @@
-
 local clangd_flags = {
   "--all-scopes-completion",
   "--suggest-missing-includes",
@@ -22,3 +21,7 @@ local opts = {
   cmd = { clangd_bin, unpack(clangd_flags) },
 }
 require("lvim.lsp.manager").setup("clangd", opts)
+
+vim.opt.shiftwidth = 2 -- use 2 space indents by default
+vim.opt.softtabstop = 2 -- use 2 space indents by default
+vim.opt.tabstop = 2 -- use 2 space indents by default
