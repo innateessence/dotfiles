@@ -88,6 +88,8 @@ alias vidiff='lvim -d'
 alias vimdiff='lvim -d'
 alias lvimdiff='lvim -d'
 
+alias lazyvim="NVIM_APPNAME=lazyvim \nvim"
+
 # Sudo alias
 alias sudo="sudo -E" # preserve env by default.
 
