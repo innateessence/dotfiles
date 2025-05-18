@@ -80,6 +80,7 @@ alias cdf="fzff_cd"
 alias xf="fzf_exec"
 
 # Editor aliases (LunarVim ftw)
+alias lvim="lazyvim"
 alias vi='nvim'
 alias vim='nvim'
 alias nvim="lvim"

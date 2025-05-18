@@ -5,7 +5,7 @@ import sys
 
 def strip_eol(lines):
     for i in range(len(lines) - 1, -1, -1):
-        if lines[i] == '\n':
+        if lines[i] == "\n":
             del lines[i]
         else:
             break
