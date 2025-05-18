@@ -3,6 +3,7 @@
 
 -- NOTE: Enable this when using rust
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" }) -- specific rust edgecase. Keep me.
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
 
 require("user.general")
 require("user.plugins.defaults")

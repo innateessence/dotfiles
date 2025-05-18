@@ -1,4 +1,3 @@
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
 
 local clangd_flags = {
   "--all-scopes-completion",
@@ -10,7 +9,7 @@ local clangd_flags = {
   "--completion-style=detailed",
   "--enable-config",          -- clangd 11+ supports reading from .clangd configuration file
   "--clang-tidy",
-  "--offset-encoding=utf-16", --temporary fix for null-ls
+  "--offset-encoding=utf-32", --temporary fix for null-ls
   -- "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*,modernize-*,-modernize-use-trailing-return-type",
   -- "--fallback-style=Google",
   -- "--header-insertion=never",
