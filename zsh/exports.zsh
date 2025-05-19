@@ -11,9 +11,7 @@ export HASKELL_PATH="$HOME/.ghcup"                 # GHC -> Haskell compiler / b
 export CARGO_PATH="$HOME/.cargo"                   # Rust
 export ERG_PATH="$HOME/.erg"                       # Erg-lang. compiles to python bytecode.
 
-export MASON_PATH="$HOME/.local/share/lvim/mason"  # Mason. My Lunarvim 'package manager' for custom LSP integrations.
-
-export PATH="$PATH:$LOCAL_PATH/bin:$LUA_PATH/bin:$RUBY_PATH/bin:$MASON_PATH/bin:$HASKELL_PATH/bin:$CARGO_PATH/bin:$GO_PATH/bin:$ERG_PATH/bin:$FS_UTILS_PATH/sbin"
+export PATH="$PATH:$LOCAL_PATH/bin:$LUA_PATH/bin:$RUBY_PATH/bin:$HASKELL_PATH/bin:$CARGO_PATH/bin:$GO_PATH/bin:$ERG_PATH/bin:$FS_UTILS_PATH/sbin"
 
 # Misc Pathing
 export DOTFILES_DIR="$HOME/.dotfiles"
