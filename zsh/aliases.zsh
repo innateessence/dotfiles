@@ -81,15 +81,13 @@ alias xf="fzf_exec"
 
 # Editor aliases (LunarVim ftw)
 alias lvim="lazyvim"
-alias vi='nvim'
-alias vim='nvim'
-alias nvim="lvim"
-alias lvim!="sudo -E lvim"
-alias vidiff='lvim -d'
-alias vimdiff='lvim -d'
-alias lvimdiff='lvim -d'
-
-alias lazyvim="NVIM_APPNAME=lazyvim \nvim"
+alias vi='lazyvim'
+alias vim='lazyvim'
+# alias nvim="lvim"
+alias lvim!="sudo -E lazyvim"
+alias vidiff='lazyvim -d'
+alias vimdiff='lazyvim -d'
+alias lvimdiff='lazyvim -d'
 
 # Sudo alias
 alias sudo="sudo -E" # preserve env by default.

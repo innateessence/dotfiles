@@ -34,8 +34,8 @@ export JIRA_URL="REDACTED"
 export JIRA_DEFAULT_PROJECT="REDACTED"
 
 # Default Progs
-export EDITOR='lvim'
-export VISUAL='lvim'
+export EDITOR='lazyvim'
+export VISUAL='lazyvim'
 
 if __is_mac; then
     export MANPAGER="sh -c 'col -bx | bat -l man --theme=default -p'"
