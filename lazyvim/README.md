@@ -7,4 +7,5 @@ Refer to the [documentation](https://lazyvim.github.io/installation) to get star
 * `mkdir -p ~/.local/bin`
 * `bash mk-symlinks.sh`
 * `export EDITOR=lazyvim`
+* `export PATH="$HOME/.local/bin:$PATH"`
 * `alias vi=lazyvim`
