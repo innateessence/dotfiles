@@ -1,4 +1,3 @@
-print("Loading supertab plugin configs...")
 return {
   "hrsh7th/nvim-cmp",
   ---@param opts cmp.ConfigSchema
