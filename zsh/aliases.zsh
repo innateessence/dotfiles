@@ -143,10 +143,6 @@ if __is_wsl; then
     alias clip="clip.exe"
 fi
 
-if __is_ubuntu; then
-    alias upgrade="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && flatpak update -y"
-fi
-
 # Unset aliases if the expected dependency doesn't exist in path
 if ! command -v bpython  &> /dev/null && command -v bpy          &> /dev/null;  then unalias bpy         ; fi
 if ! command -v bpython  &> /dev/null && command -v bpy          &> /dev/null;  then unalias bpy         ; fi
