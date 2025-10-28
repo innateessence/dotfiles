@@ -6,3 +6,5 @@ vim.g.autoformat = false -- configure auto code format on write/save
 vim.opt.relativenumber = false -- configure relative line numbers
 vim.opt.expandtab = true -- convert tabs into spaces <Ctrl+V> <TAB> to send real tab.
 vim.opt.whichwrap = "<,>,[,]" -- Configure left/right arrow keys to move cursor to the prev/next line
+
+vim.g.lazyvim_python_lsp = "pyright" -- set python lsp server to pyright
