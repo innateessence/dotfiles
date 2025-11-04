@@ -54,7 +54,7 @@ function __set_cwd_indicator(){
 }
 
 function __set_venv_indicator(){
-    local __VIRTUAL_ENV_ICON=" "
+    local __VIRTUAL_ENV_ICON="  "
     test -z $VIRTUAL_ENV \
         && __VENV_INDICATOR="" \
         || __VENV_INDICATOR="$__VIRTUAL_ENV_ICON"
@@ -79,7 +79,7 @@ function zle-line-init {
     local __EXIT_CODE="%(?.%F{green}.%F{red})%?%f"                  # Colorize exit code. Fetch this before making any other calls
     __set_all_indicators                                            # Update global indicator variables
 
-    PROMPT="$__HOSTNAME_INDICATOR$__ARCH_INDICATOR$__VENV_INDICATOR $__HPWD $__VI_INDICATOR \$ "          # Left prompt
+    PROMPT="$__HOSTNAME_INDICATOR$__ARCH_INDICATOR$__VENV_INDICATOR$__HPWD $__VI_INDICATOR \$ "          # Left prompt
     RPROMPT="$__EXIT_CODE"                                            # Right prompt
     zle reset-prompt
 }
