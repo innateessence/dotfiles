@@ -26,7 +26,7 @@ function __source_mac_post(){
     export GIT_EXTERNAL_DIFF="/opt/homebrew/bin/difft"
 }
 
-function __source_arch_linux_pre(){
+function __source_archlinux_pre(){
     if test -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; then
         source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
@@ -73,7 +73,7 @@ if [ -d ~/.dotfiles/zsh ]; then
     if __is_mac; then
         __source_mac_pre
     elif __is_arch_linux; then
-        __source_arch_pre
+        __source_archlinux_pre
     elif __is_ubuntu; then
         __source_ubuntu_pre
     fi
@@ -103,7 +103,7 @@ if [ -d ~/.dotfiles/zsh ]; then
     if __is_mac; then
         __source_mac_post
     elif __is_arch_linux; then
-        __source_arch_post
+        __source_archlinux_post
     elif __is_ubuntu; then
         __source_ubuntu_post
     fi
