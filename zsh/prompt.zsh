@@ -10,7 +10,7 @@
 function __set_hostname_indicator(){
     # Tell me if I'm running Arch Linux
     if [[ $(hostname) == "ArchDesktop" ]]; then
-        __HOSTNAME_INDICATOR="%F{cyan}(Arch) %f"
+        __HOSTNAME_INDICATOR="%F{cyan}(Arch)%f "
     elif [[ $(hostname) == "Brendens-MacBook-Pro.local" ]]; then
         __HOSTNAME_INDICATOR="(Mac) "
     else
