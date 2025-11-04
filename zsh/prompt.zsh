@@ -7,6 +7,17 @@
 #
 # }
 
+function __set_hostname_indicator(){
+    # Tell me if I'm running Arch Linux
+    if [[ $(hostname) == "ArchDesktop" ]]; then
+        __HOSTNAME_INDICATOR="%F{cyan}(Arch) %f"
+    elif [[ $(hostname) == "Brendens-MacBook-Pro.local" ]]; then
+        __HOSTNAME_INDICATOR="(Mac) "
+    else
+        __HOSTNAME_INDICATOR=""
+    fi
+}
+
 function __set_arch_indicator(){
     # Tell me if I'm emulating x86_64 on Apple Silicon CPU (Arm64)
     if [[ $(uname -m) == "x86_64" && $(uname) == "Darwin" ]]; then
@@ -57,6 +68,7 @@ function __set_vi_indicator(){
 }
 
 function __set_all_indicators(){
+    __set_hostname_indicator
     __set_vi_indicator
     __set_cwd_indicator
     __set_venv_indicator
@@ -67,7 +79,7 @@ function zle-line-init {
     local __EXIT_CODE="%(?.%F{green}.%F{red})%?%f"                  # Colorize exit code. Fetch this before making any other calls
     __set_all_indicators                                            # Update global indicator variables
 
-    PROMPT="$__ARCH_INDICATOR$__VENV_INDICATOR $__HPWD $__VI_INDICATOR \$ "          # Left prompt
+    PROMPT="$__HOSTNAME_INDICATOR$__ARCH_INDICATOR$__VENV_INDICATOR $__HPWD $__VI_INDICATOR \$ "          # Left prompt
     RPROMPT="$__EXIT_CODE"                                            # Right prompt
     zle reset-prompt
 }
