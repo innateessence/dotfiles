@@ -1,7 +1,7 @@
 local M = {}
 
 ---Run isort on the current buffer and reload it
-function M.organize_imports()
+function M.call()
   local bufnr = vim.api.nvim_get_current_buf()
   local fname = vim.api.nvim_buf_get_name(bufnr)
 

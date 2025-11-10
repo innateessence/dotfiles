@@ -13,7 +13,8 @@ return {
           {
             "<leader>co",
             function()
-              require("functions.isort").organize_imports()
+              local isort = require("functions.isort")
+              isort.call()
             end,
             desc = "Organize Imports (isort)",
           },
