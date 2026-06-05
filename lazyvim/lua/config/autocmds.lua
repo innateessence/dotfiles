@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "Treat zsh files as bash",
   pattern = { "zsh" },
   callback = function()
-    require("nvim-treesitter.highlight").attach(0, "bash")
-    vim.bo.filetype = "bash"
+    vim.treesitter.start(0, "bash") -- use bash treesitter parser
+    vim.bo.filetype = "bash" -- set filetype to bash for this buffer
   end,
 })

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import os
+import sys
 import time
 import pyautogui
 import random
@@ -28,20 +30,23 @@ def parse_args():
     parser.add_argument(
         "--duration",
         type=float,
-        default=0.01,
+        default=0.1,
         help="Duration for the mouse wiggle in seconds",
     )
     parser.add_argument(
         "--delay", type=float, default=30, help="Delay in between mouse wiggles"
     )
     parser.add_argument("--debug", action="store_true", help="Print debug messages")
+    parser.add_argument(
+        "--offset", type=int, default=1, help="Max offset for mouse wiggle in pixels"
+    )
     args = parser.parse_args()
     if args._until:
         args.until = args._until
     return args
 
 
-def parse_until_time(until):
+def parse_until_time(until) -> datetime:
     time_map = {
         "s": "seconds",
         "m": "minutes",
@@ -62,13 +67,17 @@ def parse_until_time(until):
     return until_time
 
 
-def wiggle(args):
-    offset_x = random.randint(-1, 1)
-    offset_y = random.randint(-1, 1)
+def wiggle(args) -> None:
+    min = args.offset * -1
+    max = args.offset
+    offset_x = random.randint(min, max)
+    offset_y = random.randint(min, max)
     while offset_x == 0:
-        offset_x = random.randint(-1, 1)
+        offset_x = random.randint(min, max)
     while offset_y == 0:
-        offset_y = random.randint(-1, 1)
+        offset_y = random.randint(min, max)
+    offset_x = 1
+    offset_y = 1
     if args.debug:
         print("offset_x: ", offset_x, end="")
         print(" offset_y: ", offset_y, end="")
@@ -78,7 +87,7 @@ def wiggle(args):
     pyautogui.moveRel(offset_x, offset_y, duration=args.duration)
 
 
-def sleep_loop(sleep_time, until_time):
+def sleep_loop(sleep_time, until_time) -> None:
     while sleep_time > 0:
         time.sleep(1)
         sleep_time -= 1
@@ -87,6 +96,7 @@ def sleep_loop(sleep_time, until_time):
 
 
 if __name__ == "__main__":
+    pyautogui.FAILSAFE = False
     args = parse_args()
     until_time = parse_until_time(args.until)
     while datetime.now() < until_time:

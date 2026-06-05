@@ -15,14 +15,10 @@ function __source_mac_pre(){
     if test -f "$(brew --prefix)"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; then
         source "$(brew --prefix)"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
+    source <(fzf --zsh)
 }
 
 function __source_mac_post(){
-    command -v fzf &> /dev/null && FZF_VERSION=$(fzf --version | awk '{print $1}')
-    if test -n "$FZF_VERSION"; then
-        source /opt/homebrew/Cellar/fzf/$FZF_VERSION/shell/completion.zsh
-        source /opt/homebrew/Cellar/fzf/$FZF_VERSION/shell/key-bindings.zsh
-    fi
     export GIT_EXTERNAL_DIFF="/opt/homebrew/bin/difft"
 }
 
@@ -30,15 +26,10 @@ function __source_archlinux_pre(){
     if test -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; then
         source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
+    source <(fzf --zsh)
 }
 
 function __source_archlinux_post(){
-    if test -f /usr/share/fzf/key-bindings.zsh; then
-        source /usr/share/fzf/key-bindings.zsh
-    fi
-    if test -f /usr/share/fzf/completion.zsh; then
-        source /usr/share/fzf/completion.zsh
-    fi
     if test -f ~/.fzf.zsh; then
         source ~/.fzf.zsh
     fi
@@ -48,6 +39,7 @@ function __source_ubuntu_pre(){
     if test -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; then
         source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
+    source <(fzf --zsh)
 }
 
 function __source_ubuntu_post(){
