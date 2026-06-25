@@ -6,6 +6,7 @@ alias bpy="python -m bpython"
 alias ppy="python -m ptpython"
 alias ipy="python -m IPython"
 alias http-status="hs"
+alias bat="batcat"
 alias cat="bat"
 alias extract="untar"
 alias markdown="glow"
@@ -107,12 +108,12 @@ if __is_arch_linux; then
 fi
 
 if __is_ubuntu; then
-    alias clip="xclip -i -selection clipboard"
+    alias clip="wl-copy"
 fi
 
 # MacOS specific aliases
 if __is_mac; then
-    alias clip="no-eol | pbcopy |  echo '[+] copied to clipboard'"
+    alias clip="no-eol | pbcopy ;  echo '[+] copied to clipboard'"
     alias python="python3"
     alias missing-files="brew missing"
     alias pip="pip3"
@@ -149,6 +150,7 @@ if ! command -v bpython  &> /dev/null && command -v bpy          &> /dev/null;  
 if ! command -v ptpython &> /dev/null && command -v ppy          &> /dev/null;  then unalias ppy         ; fi
 if ! command -v hs       &> /dev/null && command -v http-status  &> /dev/null;  then unalias http-status ; fi
 if ! command -v lsd      &> /dev/null && command -v ls           &> /dev/null;  then unalias ls          ; fi
+if ! command -v batcat   &> /dev/null && command -v bat          &> /dev/null;  then unalias bat         ; fi
 if ! command -v bat      &> /dev/null && command -v cat          &> /dev/null;  then unalias cat         ; fi
 if ! command -v glow     &> /dev/null && command -v markdown     &> /dev/null;  then unalias markdown    ; fi
 if ! command -v hub      &> /dev/null && command -v git          &> /dev/null;  then unalias git         ; fi
