@@ -242,6 +242,7 @@ function ve(){
     }
 
     function _list_ves(){
+        local f
         for f in $VIRTUAL_ENVS_DIR/*; do
             if [ -d "$f" ]; then
                 if [[ "$f" == "$VIRTUAL_ENV" ]]; then
@@ -300,6 +301,7 @@ function ve(){
         esac
     done
 
+    local command
     for command in "${COMMAND_QUEUE[@]}"; do
         "$command"
     done
