@@ -222,7 +222,7 @@ function ve(){
     function _is_in_ve(){ test "$VIRTUAL_ENV" ; }
     function _ve_exists(){ directory_exists "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" ; }
     function _mk_ve(){ _ve_exists && _rm_ve ; python -m venv "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" && msg "Created VirtualEnv $TARGET_VIRTUALENV" ; }
-    function _mk_ve_if_not_exists(){ if ! _ve_exists; then mk_ve; fi }
+    function _mk_ve_if_not_exists(){ if ! _ve_exists; then _mk_ve; fi }
     function _rm_ve(){ rm -rf "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" && msg "Removed VirtualEnv $TARGET_VIRTUALENV" ; }
     function _deactivate_ve(){ _is_in_ve && deactivate && info "Deactivated VirtualEnv" && unset VIRTUAL_ENV ; }
     function _toggle_ve(){ _is_in_ve && _deactivate_ve || _activate_ve ; }
