@@ -219,16 +219,16 @@ function ve(){
     fi
     local COMMAND_QUEUE=()  # A hacky way to create a queue of commands to run after parsing args
 
-    local function is_in_ve(){ test "$VIRTUAL_ENV" ; }
-    local function ve_exists(){ directory_exists "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" ; }
-    local function mk_ve(){ ve_exists && rm_ve ; python -m venv "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" && msg "Created VirtualEnv $TARGET_VIRTUALENV" ; }
-    local function mk_ve_if_not_exists(){ if ! ve_exists; then mk_ve; fi }
-    local function rm_ve(){ rm -rf "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" && msg "Removed VirtualEnv $TARGET_VIRTUALENV" ; }
-    local function deactivate_ve(){ is_in_ve && deactivate && info "Deactivated VirtualEnv" && unset VIRTUAL_ENV ; }
-    local function toggle_ve(){ is_in_ve && deactivate_ve || activate_ve ; }
-    local function activate_ve(){ ! is_in_ve && mk_ve_if_not_exists && source "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV/bin/activate" && info "Activated VirtualEnv: $TARGET_VIRTUALENV" ; }
-    local function ve_info(){ info "Current VirtualEnv: $(basename $VIRTUAL_ENV)" ; }
-    local function print_help(){
+    function _is_in_ve(){ test "$VIRTUAL_ENV" ; }
+    function _ve_exists(){ directory_exists "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" ; }
+    function _mk_ve(){ _ve_exists && _rm_ve ; python -m venv "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" && msg "Created VirtualEnv $TARGET_VIRTUALENV" ; }
+    function _mk_ve_if_not_exists(){ if ! _ve_exists; then mk_ve; fi }
+    function _rm_ve(){ rm -rf "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV" && msg "Removed VirtualEnv $TARGET_VIRTUALENV" ; }
+    function _deactivate_ve(){ _is_in_ve && deactivate && info "Deactivated VirtualEnv" && unset VIRTUAL_ENV ; }
+    function _toggle_ve(){ _is_in_ve && _deactivate_ve || _activate_ve ; }
+    function _activate_ve(){ ! _is_in_ve && _mk_ve_if_not_exists && source "$VIRTUAL_ENVS_DIR/$TARGET_VIRTUALENV/bin/activate" && info "Activated VirtualEnv: $TARGET_VIRTUALENV" ; }
+    function _ve_info(){ info "Current VirtualEnv: $(basename $VIRTUAL_ENV)" ; }
+    function _print_ve_help(){
         echo "Usage: ve [options]"
         echo
         echo "Options:"
@@ -241,7 +241,7 @@ function ve(){
         echo "  -h | --help                     Print this help text"
     }
 
-    function list_ves(){
+    function _list_ves(){
         for f in $VIRTUAL_ENVS_DIR/*; do
             if [ -d "$f" ]; then
                 if [[ "$f" == "$VIRTUAL_ENV" ]]; then
@@ -254,8 +254,8 @@ function ve(){
     }
 
     if [ ${#} -eq 0 ]; then
-        mk_ve_if_not_exists
-        toggle_ve
+        _mk_ve_if_not_exists
+        _toggle_ve
     fi
 
     while [ ${#} != 0 ]; do
@@ -266,31 +266,31 @@ function ve(){
                 shift
                 ;;
             -mk|--make)
-                COMMAND_QUEUE+=("mk_ve")
+                COMMAND_QUEUE+=("_mk_ve")
                 shift
                 ;;
             -rm|--remove)
-                COMMAND_QUEUE+=("rm_ve")
+                COMMAND_QUEUE+=("_rm_ve")
                 shift
                 ;;
             -d|--deactivate)
-                COMMAND_QUEUE+=("deactivate_ve")
+                COMMAND_QUEUE+=("_deactivate_ve")
                 shift
                 ;;
             -a|--activate)
-                COMMAND_QUEUE+=("activate_ve")
+                COMMAND_QUEUE+=("_activate_ve")
                 shift
                 ;;
             -l|--list)
-                list_ves
+                _list_ves
                 shift
                 ;;
             -i|--info)
-                ve_info
+                _ve_info
                 shift
                 ;;
             -h |--help)
-                print_help
+                _print_ve_help
                 return
                 ;;
             *)
