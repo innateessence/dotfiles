@@ -84,7 +84,6 @@ if [ -d ~/.dotfiles/zsh ]; then
     source ~/.dotfiles/zsh/prompt.zsh
 
     # Source plugins
-    source ~/.dotfiles/zsh/plugins/claude.zsh
     source ~/.dotfiles/zsh/plugins/nvm.sh
 
     # Custom function calls
