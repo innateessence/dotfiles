@@ -38,7 +38,7 @@ VAULTS_DIR="/Users/jack/vaults"
 @daily /bin/sleep 600 && /Users/jack/.dotfiles/scripts/mac/brew-upgrade-notify.sh &> /dev/null || $NOTIFY "CronJob" "Failed to notify outdated brew pkgs"
 
 # Auto update Brewfile dump
-30 9 * * * /bin/rm /Users/jack/.dotfiles/MacOSX/Brewfile && /opt/homebrew/bin/brew bundle dump --file /Users/jack/.dotfiles/MacOSX/Brewfile &> /dev/null || $NOTIFY "CronJob" "Failed to dump Brewfile"
+30 9 * * * /bin/rm /Users/jack/.dotfiles/MacOSX/Brewfile ; /opt/homebrew/bin/brew bundle dump --file /Users/jack/.dotfiles/MacOSX/Brewfile &> /dev/null || $NOTIFY "CronJob" "Failed to dump Brewfile"
 
 # Auto update user crontab dump every hour
 @hourly /usr/bin/crontab -l > /Users/jack/.dotfiles/MacOSX/user.crontab || $NOTIFY "CronJob" "Failed to dump user crontab"

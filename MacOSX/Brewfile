@@ -1,3 +1,4 @@
+tap "anomalyco/tap"
 tap "chipmk/tap"
 tap "gcenx/apple"
 tap "gcenx/wine"
@@ -101,7 +102,7 @@ brew "harfbuzz"
 # Development kit for the Java programming language
 brew "openjdk@21"
 # Multi-platform software reverse engineering framework
-brew "ghidra", link: false
+brew "ghidra"
 # Render markdown on the CLI
 brew "glow"
 # GNU version of the tar archiving utility
@@ -288,6 +289,8 @@ brew "zig"
 brew "zsh-completions"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
+# OpenCode V2 - the AI coding agent for the terminal
+brew "anomalyco/tap/opencode-v2", trusted: true
 # GPU-accelerated terminal emulator
 cask "alacritty"
 # Android SDK component
@@ -304,8 +307,6 @@ cask "devutils"
 cask "epic-games"
 # Web browser
 cask "firefox"
-# Web browser
-cask "firefox@developer-edition"
 # Screenshot software with built-in annotation tools
 cask "flameshot"
 cask "font-hack-nerd-font"
@@ -317,6 +318,8 @@ cask "ghidra"
 cask "gimp"
 # Client for the Google Drive storage service
 cask "google-drive"
+# Utility to hide menu bar items
+cask "hiddenbar"
 # Shortcut manager
 cask "icanhazshortcut"
 # Hex editor for reverse engineers
@@ -335,14 +338,10 @@ cask "paintbrush"
 cask "postman"
 # VPN client focusing on security
 cask "protonvpn"
-# Peer to peer Bitorrent client
-cask "qbittorrent"
 # Archive manager for data compression and backups
 cask "rar"
 # JDK from the Eclipse Foundation (Adoptium)
 cask "temurin"
-# Web browser focusing on security
-cask "tor-browser"
 # Turn your smartphone into a universal remote control
 cask "unified-remote"
 # Multimedia player
@@ -353,5 +352,3 @@ cask "wave"
 cask "zoom"
 go "github.com/mdempsky/gocode"
 go "github.com/x-motemen/gore/cmd/gore"
-npm "corepack"
-npm "neovim"
