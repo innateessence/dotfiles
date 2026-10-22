@@ -3,4 +3,3 @@
 -- Add any additional keymaps here
 
 -- vim.keymap.set("n", "<leader>L", ":Lazy<CR>")
-

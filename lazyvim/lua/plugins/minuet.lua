@@ -10,10 +10,11 @@ return {
       -- Optimize for low latency
       add_single_line_entry = true,
       n_completions = 3,
-      context_window = 2048,
-      request_timeout = 10,
-      throttle = 300,
-      debounce = 150,
+      context_window = 1024,
+      request_timeout = 5,
+      throttle = 100,
+      debounce = 100,
+      add_single_line_entry = true,
 
       cmp = {
         enable_auto_complete = true,
